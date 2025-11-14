@@ -1,0 +1,7 @@
+git add *nom_fichier_a_envoyer*
+git commit
+    "Demande le message du commit"
+    sauvegarder le message avec shift + x
+    "Demande le nom du fichier"
+    juste appuyer sur entrée pour pas tout fuck up
+git push
