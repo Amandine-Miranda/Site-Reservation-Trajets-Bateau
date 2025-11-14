@@ -10,3 +10,9 @@ git commit
     "Demande le nom du fichier"
     juste appuyer sur entrée pour pas tout fuck up
 git push
+
+
+
+si erreur de push :
+git rebase
+
