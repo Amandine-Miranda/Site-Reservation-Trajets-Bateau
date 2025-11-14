@@ -2,6 +2,7 @@ A faire la première fois :
     git config --global user.email "Vous@exemple.com"
     git config --global user.name "Votre Nom"
 
+git fetch
 git add *nom_fichier_a_envoyer*
 git commit
     "Demande le message du commit"
