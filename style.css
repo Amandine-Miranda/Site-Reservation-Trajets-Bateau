@@ -1,0 +1,21 @@
+header {
+    display: flex;
+    justify-content: center;
+}
+
+#logoCAN {
+    width: 250px;
+}
+
+ul{
+    text-align: center;
+    list-style: none;
+    padding: 0;
+    padding-top: 25px;
+}
+
+li {
+    padding-bottom: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 24px;
+}
