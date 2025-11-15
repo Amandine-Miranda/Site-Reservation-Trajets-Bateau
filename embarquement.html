@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <title>Carte(s) d'embarquement</title>
+        <link rel="stylesheet" href="style.css">
+        <script src=".js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+        <video autoplay muted loop id="bg-video">
+        <source src="oceanvid3.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas les vidéos HTML5.
+        </video>
+
+        <header class = "box">
+            <img src="CAN.png" id="logoCAN">
+        </header>
+
+        <main>
+            <div class="carteEmbarquement">
+                <div class="colonne1">
+                    <img src="CANbis.png">
+                    <div class="infosVoyage">
+                    <p class="libelle"> Gare de départ </p>
+                    <p class="info"> Lorient </p>                   <!-- Infos à remplacer avec JS -->
+                    <p class="libelle"> Gare d'arrivée </p>
+                    <p class="info"> Groix </p>
+                    <p class="libelle"> Date </p>
+                    <p class="info"> 01/11/2025 </p>
+                    <p class="libelle"> Heure départ </p>
+                    <p class="info"> 09:45 </p>
+                    <p class="libelle"> Bateau </p>
+                    <p class="info"> Breizh Nevez </p>
+                    </div>
+                </div>
+                <div class="colonne2">
+                    <h1> Carte d'embarquement </h1>
+                    <div class="infosReservation">
+                        <p class="libelle"> Réservation </p>
+                        <p class="info"> 2025705 </p>
+                        <p class="libelle"> Nom </p>
+                        <p class="info"> Famille Addams </p>
+                        <p class="libelle"> Passager </p>
+                        <img src="qrcode.png">
+                        <p class="libelle"> Nom </p>
+                        <p class="info"> Addams </p>
+                        <p class="libelle"> Prénom </p>
+                        <p class="info"> Mercredi </p>
+                        <p class="libelle"> Catégorie </p>
+                        <p class="info"> Jeune 18-25 ans </p>
+                        <p class="libelle"> Prix </p>
+                        <p class="info"> 13,80€ </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class = "box2">
+            <p> Compagnie Alsacienne de Navigation, 2025. Tous droits réservés </p>
+        </footer>
+    </body>
+</html>
