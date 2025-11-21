@@ -30,7 +30,6 @@ ul{
 
 li {
     padding-bottom: 5vh;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 24px;
 }
 
@@ -44,6 +43,7 @@ body{
     min-height: 100vh;
     flex-direction: column;
     background-color: #2e7ee079;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .box {
@@ -52,7 +52,7 @@ body{
     radial-gradient(67.08px at 50% calc(100% + 60px),#0000 99%,#000 101%) 50% calc(100% - 30px)/120px 100% repeat-x;
   -webkit-mask: var(--mask);
           mask: var(--mask);
-    background: linear-gradient(0.25turn, #2e7ee0a8, #ffffffad, #ffffffad, #ffffffad, #2e7ee0a8);
+    background: linear-gradient(0.25turn, #2e7ee0a8,#ffffffad, #ffdd43b6, #ffffffad, #ffdd43b6,#ffffffad, #2e7ee0a8);
 }
 
 .box2 {
@@ -61,7 +61,7 @@ body{
     radial-gradient(67.08px at 50% -60px,#0000 99%,#000 101%) 50% 30px/120px 100% repeat-x;
   -webkit-mask: var(--mask);
           mask: var(--mask);
-    background: linear-gradient(0.25turn, #2e7ee0a8, #ffffffad, #ffffffad, #ffffffad, #2e7ee0a8);
+    background: linear-gradient(0.25turn, #2e7ee0a8,#ffffffad, #ffdd43b6, #ffffffad, #ffdd43b6,#ffffffad, #2e7ee0a8);
 }
 
 footer{
@@ -73,7 +73,6 @@ footer{
 
 footer p{
     color: #13084d;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-style: italic;
     font-size: 15px;
 }
@@ -113,17 +112,26 @@ main{
 
 .carteEmbarquement{
     width: 50vw;
-    background-color: #2e7ee0a8;
+    background: #2E7EE0A8;
+    background: radial-gradient(circle, rgba(46, 126, 224, 0.671) 66%, rgba(174, 213, 255, 0.664) 100%);
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-content: space-between;
+    border-radius: 4vw;
+    padding-top: 3vh;
+    padding-right: 2vw;
+    padding-bottom: 3vh;
+    padding-left: 2vw; 
 }
 
 .carteEmbarquement img{
     width: 17vw;
     height: max-content;
     background-color: #fff;
+    border-radius: 40px;
+    padding:1vw;
 }
 
 .carteEmbarquement h1{
@@ -139,4 +147,37 @@ main{
 .colonne2{
     display: flex;
     flex-direction: column;
+}
+
+.colonne2{}
+
+.infosVoyage{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: bold;
+    color:#fff;
+}
+
+.libelle{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 17px;
+}
+
+.infos{
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    font-weight:normal;
+}
+
+.info{
+    background-color: #fff;
+    color:#000;
+    padding:1vh;
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
+    border-radius: 15px;
 }
