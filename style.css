@@ -121,7 +121,9 @@ main{
     padding-top: 3vh;
     padding-right: 2vw;
     padding-bottom: 3vh;
-    padding-left: 2vw; 
+    padding-left: 2vw;
+    margin-top: 7vh;
+    margin-bottom: 7vh;
 }
 
 .carteEmbarquement h1{
@@ -147,6 +149,7 @@ main{
     width: 25vw;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
@@ -156,6 +159,7 @@ main{
     justify-content: space-around;
     align-content: space-between;
     font-size: 17px;
+    width: 40%;
 }
 
 .infos{
@@ -165,6 +169,7 @@ main{
     font-weight:normal;
     align-items: end;
     justify-content: space-around;
+    width: 40%;
 }
 
 .infos p{
@@ -216,4 +221,23 @@ main{
 
 #containerEmbarq h1{
     margin-right: 2.5vw;
+}
+
+hr{
+    border: none;
+    border-top: 3px double #ffffff;
+    color: #ffffff;
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+    width: 100%;
+}
+
+h2{
+    color:#fff;
+    font-size: 20px;
+}
+
+#colonne2 > h2{
+    align-self: center;
 }
