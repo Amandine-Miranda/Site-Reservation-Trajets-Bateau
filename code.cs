@@ -65,7 +65,7 @@ class Structures
 		// dictionnaire contenant des dictionnaires contenant les prix par catégorie de vehicule par traversee
         
 		initPrix(catPass,catVe);
-		// remplis les deux dictionnaires si dessus 
+		// remplis les deux dictionnaires ci-dessus 
 	
 			
 
