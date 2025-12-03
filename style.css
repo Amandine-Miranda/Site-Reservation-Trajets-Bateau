@@ -103,6 +103,11 @@ body > * {
     footer p{
         font-size: 2.5vw;
     }
+
+    .carteEmbarquement {
+        width: 75vw;
+        flex-direction: column;
+    }
 }
 
 main{
