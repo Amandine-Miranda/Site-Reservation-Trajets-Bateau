@@ -93,6 +93,26 @@ body > * {
     z-index: 1;
 }
 
+<<<<<<< HEAD
+=======
+@media (max-width: 600px){
+    #logoCAN {
+        width: 50vw;
+        max-width: 50vw;
+        max-height: 50vh;
+    }
+
+    footer p{
+        font-size: 2.5vw;
+    }
+
+    .carteEmbarquement {
+        width: 75vw;
+        flex-direction: column;
+    }
+}
+
+>>>>>>> refs/remotes/origin/main
 main{
     display: flex;
     justify-content: center;
