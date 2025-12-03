@@ -108,6 +108,7 @@ body > * {
 main{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .carteEmbarquement{
@@ -240,4 +241,37 @@ h2{
 
 #colonne2 > h2{
     align-self: center;
+}
+
+#flechegauche, #flechedroite{
+    width: 4vw;
+    height: fit-content;
+    border-radius: 100%;
+    margin: 2vw;
+    box-shadow: 0px 10px 5px rgba(19, 14, 56, 0.493);
+    background: #fff;
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+}   
+
+#flechegauche:hover, #flechedroite:hover{
+    top: -7px;
+    cursor: pointer;
+}
+
+a{
+    color:#13084d;
+    text-decoration:wavy;
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+}
+
+a:visited{
+    color:#1660bb;
+}
+
+a:hover{
+    top: -7px;
 }

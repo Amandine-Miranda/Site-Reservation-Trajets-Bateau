@@ -5,7 +5,6 @@
         <meta charset="utf-8" />
         <title>Carte(s) d'embarquement</title>
         <link rel="stylesheet" href="style.css">
-        <script src=".js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
@@ -16,10 +15,11 @@
         </video>
 
         <header class="box">
-            <img src="CAN.png" id="logoCAN">
+            <a href="accueil.html"> <img src="CAN.png" id="logoCAN"> </a>
         </header>
 
         <main>
+            <img src="flechegauche.png" alt="flechegauche" id="flechegauche">
             <div class="carteEmbarquement">
                 <div class="titreCarteEmbarq">
                     <img src="CANbis.png" id="logoCAN2">
@@ -38,11 +38,11 @@
                             <p> Bateau </p>
                         </div>
                         <div class="infos">
-                            <p> Lorient </p>                   <!-- Infos à remplacer avec JS -->
-                            <p> Groix </p>
-                            <p> 01/11/2025 </p>
-                            <p> 09:45 </p>
-                            <p> Breizh Nevez </p>
+                            <p id="gareDepart"> Lorient </p>                   <!-- Infos à remplacer avec JS -->
+                            <p id="gareArrivee"> Groix </p>
+                            <p id="date"> 01/11/2025 </p>
+                            <p id="heure"> 09:45 </p>
+                            <p id="bateau"> Breizh Nevez </p>
                         </div>
                     </div>
                     <div id="colonne2">
@@ -51,8 +51,8 @@
                             <p> Nom </p>
                         </div>
                         <div class="infos">
-                            <p> 2025705 </p>
-                            <p> Famille Addams </p>
+                            <p id="reservation"> 2025705 </p>
+                            <p id="famille"> Famille Addams </p>
                         </div>
 
                         <hr>
@@ -69,18 +69,21 @@
                             <p> Prix </p>
                         </div>
                         <div class="infos">
-                            <p> Addams </p>                   <!-- Infos à remplacer avec JS -->
-                            <p> Mercredi </p>
-                            <p> Jeune 18-25 ans </p>
-                            <p> 13,80€ </p>
+                            <p id="nom"> Addams </p>                   <!-- Infos à remplacer avec JS -->
+                            <p id="prenom"> Mercredi </p>
+                            <p id="categorie"> Jeune 18-25 ans </p>
+                            <p id="prix"> 13,80€ </p>
                         </div>
                     </div>
                 </div>
             </div>
+            <img src="flechedroite.png" alt="flechedroite" id="flechedroite">
         </main>
 
         <footer class="box2">
             <p> Compagnie Alsacienne de Navigation, 2025. Tous droits réservés </p>
         </footer>
+
+        <script src="test.js"></script>
     </body>
 </html>
