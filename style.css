@@ -93,18 +93,6 @@ body > * {
     z-index: 1;
 }
 
-@media (max-width: 600px){
-    #logoCAN {
-        width: 50vw;
-        max-width: 50vw;
-        max-height: 50vh;
-    }
-
-    footer p{
-        font-size: 2.5vw;
-    }
-}
-
 main{
     display: flex;
     justify-content: center;
@@ -274,4 +262,16 @@ a:visited{
 
 a:hover{
     top: -7px;
+}
+
+@media (max-width: 600px){
+    #logoCAN {
+        width: 50vw;
+        max-width: 50vw;
+        max-height: 50vh;
+    }
+
+    footer p{
+        font-size: 2.5vw;
+    }
 }
