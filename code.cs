@@ -2,8 +2,62 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-class Structures
+class Code
 {
+	
+
+	public static void Main()
+	{
+		Dictionary<string, Dictionary<string, float>> catPass;
+		catPass = new Dictionary<string, Dictionary<string, float>>();
+		// dictionnaire contenant des dictionnaires contenant les prix par catégorie de passagers par traversée
+		Dictionary<string, Dictionary<string, float>> catVe;
+                catVe = new Dictionary<string, Dictionary<string, float>>();
+		// dictionnaire contenant des dictionnaires contenant les prix par catégorie de vehicule par traversee
+        
+		initPrix(catPass,catVe);
+		// remplis les deux dictionnaires si dessus 
+	
+			
+
+
+
+
+	}	
+
+	public static void reservation(Dictionary<string, Dictionary<string, float>> catPass , Dictionary<string, Dictionary<string, float>> catVe)
+	{
+	
+		Reservation res;
+		string nomRes;
+		int trav;
+		string hour;
+		string date;
+		string horodatage;
+
+		Console.WriteLine("Quel est le nom de votre reservation ?");
+		nomRes = Console.ReadLine();
+		Console.WriteLine("Quel est la traversee pour laquelle vous souhaitez reserver ?\n 1 : \n 2 : \n 3 : \n 4 : ");
+                trav = int.Parse(Console.ReadLine());
+		while(trav != 1 && trav != 2 && trav != 3 && trav != 4 )
+		{
+		
+			Console.WriteLine("Traversee invalide.\nQuel est la traversee pour laquelle vous souhaitez reserver ?\n 1 : \n 2 : \n 3 : \n 4 : ");
+                	trav = int.Parse(Console.ReadLine());
+
+		}	
+		Console.WriteLine("Quel est le nom de votre reservation ?");
+                nomRes = Console.ReadLine();
+		Console.WriteLine("Quel est le nom de votre reservation ?");
+                nomRes = Console.ReadLine();
+		Console.WriteLine("Quel est le nom de votre reservation ?");
+                nomRes = Console.ReadLine();
+
+
+	}
+	
+	/////////////////////////////////////////////////ICI LES STRUCTURES MOCHES AU COIN ////////////////////////////////////////////////////////////////////
+	
 	public struct Passager
         {
                 public string categorie;     	//categorie du passager ex : "adu26p"
@@ -49,11 +103,8 @@ class Structures
                         heure = h;
 			horodatage = "vide pour l'instant";
                 }
-
-        
-
-
         }
+<<<<<<< HEAD
 
 	public static void Main()
 	{
@@ -106,6 +157,8 @@ class Structures
 	
 	}
 	
+=======
+>>>>>>> 5e25ceb (déplacement des structures pour qu'amandine bosse dessus en parallèle)
 	
 	
 	
