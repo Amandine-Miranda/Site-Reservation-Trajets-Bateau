@@ -93,8 +93,6 @@ body > * {
     z-index: 1;
 }
 
-<<<<<<< HEAD
-=======
 @media (max-width: 600px){
     #logoCAN {
         width: 50vw;
@@ -112,7 +110,6 @@ body > * {
     }
 }
 
->>>>>>> refs/remotes/origin/main
 main{
     display: flex;
     justify-content: center;
@@ -257,7 +254,7 @@ h2{
     border-radius: 100%;
     margin: 2vw;
     box-shadow: 0px 10px 5px rgba(19, 14, 56, 0.493);
-    background: #fff;
+    background: #ffffffb2;
     position: relative;
     top: 0;
     transition: top ease 0.5s;
