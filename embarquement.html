@@ -19,65 +19,75 @@
         </header>
 
         <main>
-            <img src="flechegauche.png" alt="flechegauche" id="flechegauche">
-            <div class="carteEmbarquement">
-                <div class="titreCarteEmbarq">
-                    <img src="CANbis.png" id="logoCAN2">
-                    <div id="containerEmbarq">
-                        <h1> Carte d'embarquement </h1>
-                        
-                    </div>
-                </div>
-                <div class="colonnes">
-                    <div id="colonne1">
-                        <div class="libelle">
-                            <p> Gare de départ </p>
-                            <p> Gare d'arrivée </p>
-                            <p> Date </p>
-                            <p> Heure départ </p>
-                            <p> Bateau </p>
-                        </div>
-                        <div class="infos">
-                            <p id="gareDepart"> Lorient </p>                   <!-- Infos à remplacer avec JS -->
-                            <p id="gareArrivee"> Groix </p>
-                            <p id="date"> 01/11/2025 </p>
-                            <p id="heure"> 09:45 </p>
-                            <p id="bateau"> Breizh Nevez </p>
-                        </div>
-                    </div>
-                    <div id="colonne2">
-                        <div class="libelle">
-                            <p> Réservation </p>
-                            <p> Nom </p>
-                        </div>
-                        <div class="infos">
-                            <p id="reservation"> 2025705 </p>
-                            <p id="famille"> Famille Addams </p>
-                        </div>
-
-                        <hr>
-
-                        <h2> Passager </h2>         <!-- Info à remplacer avec JS (Soit passager, soit véhicule) -->
-                        <img src="qrcode.png" id="qrcode">
-
-                        <hr>
-
-                        <div class="libelle">
-                            <p> Nom </p>
-                            <p> Prénom </p>
-                            <p> Catégorie </p>
-                            <p> Prix </p>
-                        </div>
-                        <div class="infos">
-                            <p id="nom"> Addams </p>                   <!-- Infos à remplacer avec JS -->
-                            <p id="prenom"> Mercredi </p>
-                            <p id="categorie"> Jeune 18-25 ans </p>
-                            <p id="prix"> 13,80€ </p>
-                        </div>
-                    </div>
-                </div>
+            <div id="entrerResa">
+                <label for="numResa"> Entrez le numéro de réservation dont vous voulez voir les cartes d'embarquement : (7 chiffres) </label>
+                <br>
+                <input type="text" id="numResa" name="numResa" required minlength="7" maxlength="7">
+                <input type="button" value="Envoyer" onclick="reservation()">
             </div>
-            <img src="flechedroite.png" alt="flechedroite" id="flechedroite">
+
+            <nav id="navigation" class="hidden">
+                <img src="flechegauche.png" alt="flechegauche" id="flechegauche">
+                <div class="carteEmbarquement">
+                    <div class="titreCarteEmbarq">
+                        <img src="CANbis.png" id="logoCAN2">
+                        <div id="containerEmbarq">
+                            <h1> Carte d'embarquement </h1>
+                            
+                        </div>
+                    </div>
+                    <div class="colonnes">
+                        <div id="colonne1">
+                            <div class="libelle">
+                                <p> Gare de départ </p>
+                                <p> Gare d'arrivée </p>
+                                <p> Date </p>
+                                <p> Heure départ </p>
+                                <p> Bateau </p>
+                            </div>
+                            <div class="infos">
+                                <p id="gareDepart"> Lorient </p>                   <!-- Infos à remplacer avec JS -->
+                                <p id="gareArrivee"> Groix </p>
+                                <p id="date"> 01/11/2025 </p>
+                                <p id="heure"> 09:45 </p>
+                                <p id="bateau"> Breizh Nevez </p>
+                            </div>
+                        </div>
+                        <div id="colonne2">
+                            <div class="libelle">
+                                <p> Réservation </p>
+                                <p> Nom </p>
+                            </div>
+                            <div class="infos">
+                                <p id="reservation"> 2025705 </p>
+                                <p id="famille"> Famille Addams </p>
+                            </div>
+
+                            <hr>
+
+                            <h2> Passager </h2>         <!-- Info à remplacer avec JS (Soit passager, soit véhicule) -->
+                            <img src="qrcode.png" id="qrcode">
+
+                            <hr>
+
+                            <div class="libelle">
+                                <p> Nom </p>
+                                <p> Prénom </p>
+                                <p> Catégorie </p>
+                                <p> Prix </p>
+                            </div>
+                            <div class="infos">
+                                <p id="nom"> Addams </p>                   <!-- Infos à remplacer avec JS -->
+                                <p id="prenom"> Mercredi </p>
+                                <p id="categorie"> Jeune 18-25 ans </p>
+                                <p id="prix"> 13,80€ </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <img src="flechedroite.png" alt="flechedroite" id="flechedroite">
+            </nav>
+            <h2 id="compteur"></h2>
         </main>
 
         <footer class="box2">

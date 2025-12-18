@@ -58,114 +58,100 @@ class Structures
 
 	public static void Main()
 	{
-                string nomResaUtil;
-                int liaisonUtil;
-                Dictionary<string, Dictionary<string,int>> horaires;
-                horaires = new Dictionary<string, Dictionary<string, int>>();
+                string nomResaUtil;     //Nom entré par l'utilisateur pour la réservation
+                int liaisonUtil = 0;        //Liaison choisie par l'utilisateur
+                Dictionary<string, Dictionary<string,int>> horaires;    //Dictionnaire des horaires en fonction de la liaison choisie
+                horaires = new Dictionary<string, Dictionary<string, int>>();   //Initialisation du dictionnaire
 
-                string confirmation = "non";
+                string confirmation = "non";   //Variable pour confirmer la réservation
 
-                while (confirmation.ToLower().Contains("non"))
+                while (confirmation.ToLower().Contains("non"))  //Tant que la réservation n'est pas confirmée
                 {       
-                        Console.WriteLine("Quel est le nom de votre réservation ?");
-                        nomResaUtil = Console.ReadLine();
+                        Console.WriteLine("Quel est le nom de votre réservation ?");    // Demande le nom de la réservation à l'utilisateur
+                        nomResaUtil = Console.ReadLine();      // L'enregistre dans nomResaUtil
 
-                        string reponse = "non";
+                        string reponse = "non"; //Variable pour confirmer le nom
 
-                        while (reponse.ToLower().Contains("non"))
+                        while (reponse.ToLower().Contains("non"))       //Tant que le nom n'est pas confirmé
                         {
-                                Console.WriteLine("Quel est le nom de votre réservation ?");
-                                nomResaUtil = Console.ReadLine();
-                                Console.WriteLine("Est-ce le bon nom de réservation : " + nomResaUtil + " ?");
-                                reponse = Console.ReadLine();
+                                Console.WriteLine("Quel est le nom de votre réservation ?");    //Demande le nom pour la réservation
+                                nomResaUtil = Console.ReadLine();       //L'enregistre dans nomResaUtil
+                                Console.WriteLine("Est-ce le bon nom de réservation : " + nomResaUtil + " ?");  //Demande si le nom est le bon
+                                reponse = Console.ReadLine();   //Enregistre la réponse dans reponse
                         }
 
-                        Console.WriteLine("Pour quelle liaison voulez-vous réserver ?\n1 - Lorient => Groix\n2 - Groix => Lorient\n3 - Quiberon => Le Palais\n4 - Le Palais => Quiberon");
-                        liaisonUtil = int.Parse(Console.ReadLine());
 
-                        if(liaisonUtil == 1)
+                        while(liaisonUtil != 1 && liaisonUtil != 2 && liaisonUtil != 3 && liaisonUtil != 4) //Tant que l'utilisateur n'a pas fait un choix valide (entre 1 et 4)
                         {
-                                horaires = creerLorientGroix();
-                                Console.WriteLine("Horaires pour Lorient => Groix :\n");
-                        }
-
-                        else if(liaisonUtil == 2)
-                        {
-                                horaires = creerGroixLorient();
-                                Console.WriteLine("Horaires pour Groix => Lorient :\n");
-                        }
-
-                        else if(liaisonUtil == 3)
-                        {
-                                horaires = creerQuiberonPalais();
-                                Console.WriteLine("Horaires pour Quiberon => Le Palais :\n");
-                        }
-
-                        else if(liaisonUtil == 4)
-                        {
-                                horaires = creerPalaisQuiberon();
-                                Console.WriteLine("Horaires pour Le Palais => Quiberon :\n");
-                        }
-
-                        else
-                        {
-                                Console.WriteLine("Veuillez réessayez en entrant un chiffre entre 1 et 4");
-                        }
-
-                        foreach(string horaire in horaires.Keys)
-                        {
-                                Console.Write(horaire + " : ");
-                                foreach(string heure in horaires[horaire].Keys)
-                                {
-                                        Console.Write(heure + " | ");
-                                }
-                                Console.WriteLine("\n");
-                        }
-
-                        string dateDepart;
-
-                        Console.Write("Choisissez votre date de départ : ");
-                        dateDepart = Console.ReadLine().ToUpper();
-
-                        foreach(string horaire in horaires.Keys)
-                        {
-                                if(horaire == dateDepart)
-                                {
-                                        Console.Write("\n" + horaire + " : ");
-                                        foreach(string heure in horaires[horaire].Keys)
-                                        {
-                                                Console.Write(heure + " | ");
-                                        }
-                                        Console.WriteLine("\n");
-                                }
-                        }
-
-                        string horaireDepart;
-
-                        Console.Write("Choisissez votre horaire : ");
-                        horaireDepart = Console.ReadLine();
-
-                        /*bool heureValide = false;
-
-                        while (!heureValide)
-                        {
-                                if (horaires.ContainsKey(dateDepart) && horaires[dateDepart].ContainsKey(horaireDepart))
-                                {
-                                        heureValide = true;
-                                }
+                                Console.WriteLine("Pour quelle liaison voulez-vous réserver ?\n1 - Lorient => Groix\n2 - Groix => Lorient\n3 - Quiberon => Le Palais\n4 - Le Palais => Quiberon");      //Demande à l'utilisateur quelle liaison il veut choisir
+                                liaisonUtil = int.Parse(Console.ReadLine()); //L'enregistre dans liaisonUtil
                                 
-                                else
+                                if(liaisonUtil == 1) //Si liaisonUtil est égal à 1 (si l'utilisateur à choisi la liaison Lorient => Groix)
                                 {
-                                        Console.Write("Horaire invalide, recommencez : ");
-                                        horaireDepart = Console.ReadLine();
+                                        horaires = creerLorientGroix(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                        Console.WriteLine("Horaires pour Lorient => Groix :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
                                 }
-                        }*/
 
-                        //Horaire valide ça marche pas même quand je mets un horaire valide ça veut pas....
+                                else if(liaisonUtil == 2) //Si liaisonUtil est égal à 2 (si l'utilisateur à choisi la liaison Groix => Lorient)
+                                {
+                                        horaires = creerGroixLorient(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                        Console.WriteLine("Horaires pour Groix => Lorient :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
+                                }
 
-                        Console.WriteLine("\nVeuillez confirmer votre réservation :\nNom : " + nomResaUtil + "\nDate du départ : " + dateDepart + "\nHeure du départ : " + horaireDepart);
+                                else if(liaisonUtil == 3) //Si liaisonUtil est égal à 3 (si l'utilisateur à choisi la liaison Quiberon => Le Palais)
+                                {
+                                        horaires = creerQuiberonPalais(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                        Console.WriteLine("Horaires pour Quiberon => Le Palais :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
+                                }
 
-                        confirmation = Console.ReadLine();
+                                else if(liaisonUtil == 4) //Si liaisonUtil est égal à 4 (si l'utilisateur à choisi la liaison Le Palais => Quiberon)
+                                {
+                                        horaires = creerPalaisQuiberon(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                        Console.WriteLine("Horaires pour Le Palais => Quiberon :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
+                                }
+
+                                else //Sinon, c'est que l'utilisateur à entré un chiffre non valide
+                                {
+                                        Console.WriteLine("Veuillez réessayez en entrant un chiffre entre 1 et 4"); // On en l'informe
+                                }
+                        }
+
+                        foreach(string horaire in horaires.Keys) //Pour chaque clé (jour) du dictionnaire des horaires du mois de novembre
+                        {
+                                Console.Write(horaire + " : "); //On affiche la clé avec un : pour bien espacer
+                                foreach(string heure in horaires[horaire].Keys) // Pour chaque valeur de chaque clé dans le dictionnaire des horaire
+                                {
+                                        Console.Write(heure + " | "); // On affiche cette valeur (l'heure) avec un | pour bien les séparer
+                                }
+                                Console.WriteLine("\n"); //Retour à la ligne à chaque jour pour améliorer la lisibilité
+                        }
+
+                        string dateDepart; // Variable qui stocke le date de départ choisie par l'utilisateur
+
+                        Console.Write("Choisissez votre date de départ : "); //Demande à l'utilisateur de choisir une date de départ à partir de la liste de jours proposés précédemment
+                        dateDepart = Console.ReadLine().ToUpper(); //Stocke la réponse de l'utilisateur et la mets en majuscule pour chercher plus facilement dans le dictionnaire des horaires
+
+                        foreach(string horaire in horaires.Keys) //Pour chaque jour dans le dictionnaire des horaires
+                        {
+                                if(horaire == dateDepart) //Si le jour correspond à celui choisi par l'utilisateur
+                                {
+                                        Console.Write("\n" + horaire + " : "); // Alors on reprécise ce jour
+                                        foreach(string heure in horaires[horaire].Keys) // Et pour chaque heure dans le jour
+                                        {
+                                                Console.Write(heure + " | "); // On l'écrit avec un séparateur pour aérer
+                                        }
+                                        Console.WriteLine("\n"); // Et on met un retour à la ligne pour aérer (encore)
+                                }
+                        }
+
+                        string horaireDepart; // Variable qui stocke l'heure choisie par l'utilisateur
+
+                        Console.Write("Choisissez votre horaire : "); // On demande à l'utilisateur de choisir une heure de départ parmi celles proposées
+                        horaireDepart = Console.ReadLine(); // On stocke ce choix dans la variable horaireDepart
+
+                        Console.WriteLine("\nVeuillez confirmer votre réservation :\nNom : " + nomResaUtil + "\nDate du départ : " + dateDepart + "\nHeure du départ : " + horaireDepart); //On demande à l'utilisateur si sa réservation est bonne
+
+                        confirmation = Console.ReadLine(); // Et ensuite on stocke sa réponse dans confirmation pour sortir du Tant Que si c'est égal à "oui"
                 }
 
                 //On a bien toutes les infos de la réservation !
