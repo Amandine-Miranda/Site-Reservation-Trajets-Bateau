@@ -20,14 +20,14 @@
 
         <main>
             <div id="entrerResa">
-                <label for="numResa"> Entrez le numéro de réservation dont vous voulez voir les cartes d'embarquement : (7 chiffres) </label>
+                <label for="numResa"> Entrez le numéro de réservation dont vous voulez voir les cartes d'embarquement :</label>
                 <br>
                 <input type="text" id="numResa" name="numResa" required minlength="7" maxlength="7">
-                <input type="button" value="Envoyer" onclick="reservation()">
+                <input type="button" value="Envoyer" onclick="chargerAPI()">
             </div>
 
             <nav id="navigation" class="hidden">
-                <img src="flechegauche.png" alt="flechegauche" id="flechegauche">
+                <img src="flechegauche.png" alt="flechegauche" id="flechegauche" onclick="changerPassagerEnMoins()">
                 <div class="carteEmbarquement">
                     <div class="titreCarteEmbarq">
                         <img src="CANbis.png" id="logoCAN2">
@@ -46,11 +46,11 @@
                                 <p> Bateau </p>
                             </div>
                             <div class="infos">
-                                <p id="gareDepart"> Lorient </p>                   <!-- Infos à remplacer avec JS -->
-                                <p id="gareArrivee"> Groix </p>
-                                <p id="date"> 01/11/2025 </p>
-                                <p id="heure"> 09:45 </p>
-                                <p id="bateau"> Breizh Nevez </p>
+                                <p id="gareDepart"> </p>                   
+                                <p id="gareArrivee"> </p>
+                                <p id="date"> </p>
+                                <p id="heure"> </p>
+                                <p id="bateau"> </p>
                             </div>
                         </div>
                         <div id="colonne2">
@@ -59,8 +59,8 @@
                                 <p> Nom </p>
                             </div>
                             <div class="infos">
-                                <p id="reservation"> 2025705 </p>
-                                <p id="famille"> Famille Addams </p>
+                                <p id="reservation"> </p>
+                                <p id="famille"> </p>
                             </div>
 
                             <hr>
@@ -74,18 +74,20 @@
                                 <p> Nom </p>
                                 <p> Prénom </p>
                                 <p> Catégorie </p>
+                                <p class="nombre"> Nombre </p>
                                 <p> Prix </p>
                             </div>
                             <div class="infos">
-                                <p id="nom"> Addams </p>                   <!-- Infos à remplacer avec JS -->
-                                <p id="prenom"> Mercredi </p>
-                                <p id="categorie"> Jeune 18-25 ans </p>
-                                <p id="prix"> 13,80€ </p>
+                                <p id="nom"> </p>                   
+                                <p id="prenom"> </p>
+                                <p id="categorie"> </p>
+                                <p class="nombre" id="nb"> </p>
+                                <p id="prix"> </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <img src="flechedroite.png" alt="flechedroite" id="flechedroite">
+                <img src="flechedroite.png" alt="flechedroite" id="flechedroite" onclick="changerPassagerEnPlus()">
             </nav>
             <h2 id="compteur"></h2>
         </main>

@@ -305,7 +305,7 @@ a:hover{
     padding: 1vw;
     background-color: #ffffffc4;
     border-radius: 50px;
-    width: 50vw;
+    width: 60vw;
     font-size: 18px;
     text-align: center;
 }
@@ -327,6 +327,14 @@ a:hover{
     border-radius: 25px;
     font-size: 18px;
     text-align: center;
+}
+
+#nom, #prenom{
+    display:block;
+}
+
+.nombre{
+    display: none;
 }
 
 @media (max-width: 600px){

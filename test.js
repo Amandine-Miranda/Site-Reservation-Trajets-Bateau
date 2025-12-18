@@ -1,18 +1,175 @@
-let cartes = [];       
-let index = 0;
-let tabCartesBonnes = [];
+const id = document.getElementById("numResa").value;
+const urlAPI = `https://can.iutrs.unistra.fr/api/reservation/${id}`;
+const navigation = document.getElementById("navigation");
+let index = 1;
 
-// Chargement du JSON
-async function chargerJSON() {
+async function chargerAPI() {
     try {
-        const response = await fetch("test.json");
-        cartes = await response.json();
+        const response = await fetch(urlAPI);
+        carte = await response.json();
     } catch (e) {
         console.error("Erreur de chargement JSON :", e);
     }
+    chargerPassager();
+    afficherCarte();
 }
 
-async function reservation(){
+function afficherCarte() {
+
+    navigation.classList.remove("hidden");
+
+    document.getElementById("gareDepart").textContent = carte.portDepart;
+    document.getElementById("gareArrivee").textContent = carte.portArrivee;
+    document.getElementById("date").textContent = carte.date;
+    document.getElementById("heure").textContent = carte.heure;
+    document.getElementById("bateau").textContent = carte.bateau;
+
+    document.getElementById("reservation").textContent = carte.id;
+    document.getElementById("famille").textContent = carte.nom;
+
+}
+
+function chargerCarte(){
+
+    if(index <= carte.nbPassagers && index > 0){
+        alert(index);
+        chargerPassager();
+    }
+
+    else if(index > carte.nbPassagers && index <= (carte.nbPassagers + carte.nbVehicules)){
+        alert(index);
+        chargerVehicule();
+    }
+
+}
+
+async function chargerPassager(){
+
+    const urlPassager = `${urlAPI}/passager/${index}`
+
+    try {
+        const responsePassager = await fetch(urlPassager);
+        cartePassager = await responsePassager.json();
+    } catch (e) {
+        console.error("Erreur de chargement JSON :", e);
+    }
+
+    document.getElementById("nom").textContent = cartePassager.nom;
+    document.getElementById("prenom").textContent = cartePassager.prenom;
+    document.getElementById("categorie").textContent = cartePassager.libelleCategorie;
+    document.getElementById("prix").textContent = cartePassager.price + "€";
+
+}
+
+async function chargerVehicule(){
+
+    const urlVehicule = `${urlAPI}/vehicule/${index - carte.nbPassagers}`;
+
+    try {
+        const responseVehicule = await fetch(urlVehicule);
+        carteVehicule = await responseVehicule.json();
+    } catch (e) {
+        console.error("Erreur de chargement JSON :", e);
+    }
+
+    document.getElementById("nom").style.display = "hidden";
+    document.getElementById("prenom").style.display = "hidden";
+    document.getElementsByClassName("nombre").style.display = "block";
+
+    document.getElementById("nb").textContent = carteVehicule.quantite;
+    //document.getElementById("categorie").textContent =                                //CATÉGORIE 4 ??????????????????????????????????
+    document.getElementById("prix").textContent = carteVehicule.prix + "€";
+
+}
+
+function changerPassagerEnPlus(){
+
+    index = index + 1;
+    chargerCarte();
+}
+
+function changerPassagerEnMoins(){
+
+    if(index > 0){
+        index = index - 1;
+        chargerCarte();
+    }
+    else{
+        alert("Plus de passagers avant ce point.");
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Chargement du JSON
+
+
+/*async function reservation(){
     const numResa = document.getElementById("numResa").value;
     const navigation = document.getElementById("navigation");
 
@@ -31,33 +188,10 @@ async function reservation(){
 
     if (tabCartesBonnes.length > 0) {
         navigation.classList.remove("hidden");
-        afficherCarte(index);
+        afficherCarte(0);
     } else {
         alert("Aucune réservation trouvée");
     }
-}
-
-function afficherCarte(i) {
-    const c = tabCartesBonnes[i];
-
-    document.getElementById("gareDepart").textContent = c.gareDepart;
-    document.getElementById("gareArrivee").textContent = c.gareArrivee;
-    document.getElementById("date").textContent = c.date;
-    document.getElementById("heure").textContent = c.heure;
-    document.getElementById("bateau").textContent = c.bateau;
-
-    document.getElementById("reservation").textContent = c.reservation;
-    document.getElementById("famille").textContent = c.famille;
-
-    document.getElementById("nom").textContent = c.nom;
-    document.getElementById("prenom").textContent = c.prenom;
-    document.getElementById("categorie").textContent = c.categorie;
-    document.getElementById("prix").textContent = c.prix;
-
-    console.log("Carte affichée :", i, tabCartesBonnes[i]);
-
-    document.getElementById("compteur").textContent = `Carte ${index + 1} / ${tabCartesBonnes.length}`;
-
 }
 
 // Navigation gauche / droite
@@ -75,7 +209,6 @@ function initNavigation() {
     });
 
     fd.addEventListener("click", () => {
-        console.log("CLICK DROITE");
         if (index < tabCartesBonnes.length - 1) {
             index++;
             afficherCarte(index);
@@ -87,4 +220,4 @@ function initNavigation() {
 document.addEventListener("DOMContentLoaded", () => {
     chargerJSON();
     initNavigation();
-});
+});*/
