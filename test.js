@@ -32,12 +32,10 @@ function afficherCarte() {
 function chargerCarte(){
 
     if(index <= carte.nbPassagers && index > 0){
-        alert(index);
         chargerPassager();
     }
 
     else if(index > carte.nbPassagers && index <= (carte.nbPassagers + carte.nbVehicules)){
-        alert(index);
         chargerVehicule();
     }
 
@@ -54,6 +52,20 @@ async function chargerPassager(){
         console.error("Erreur de chargement JSON :", e);
     }
 
+    document.getElementById("catCarte").textContent = "Passager";
+    
+    let specPassager = document.getElementsByClassName("specPassager");
+
+    for(let i = 0; i < specPassager.length; i++){
+        specPassager[i].style.display = "block";
+    }
+
+    let tabNombre = document.getElementsByClassName("nombre");
+
+    for(let i = 0; i < tabNombre.length; i++){
+        tabNombre[i].style.display = "none";
+    }
+
     document.getElementById("nom").textContent = cartePassager.nom;
     document.getElementById("prenom").textContent = cartePassager.prenom;
     document.getElementById("categorie").textContent = cartePassager.libelleCategorie;
@@ -63,8 +75,10 @@ async function chargerPassager(){
 
 async function chargerVehicule(){
 
-    const urlVehicule = `${urlAPI}/vehicule/${index - carte.nbPassagers}`;
+    document.getElementById("catCarte").textContent = "Véhicule";
 
+    const urlVehicule = `${urlAPI}/vehicule/${index - carte.nbPassagers}`;
+ 
     try {
         const responseVehicule = await fetch(urlVehicule);
         carteVehicule = await responseVehicule.json();
@@ -72,20 +86,40 @@ async function chargerVehicule(){
         console.error("Erreur de chargement JSON :", e);
     }
 
-    document.getElementById("nom").style.display = "hidden";
-    document.getElementById("prenom").style.display = "hidden";
-    document.getElementsByClassName("nombre").style.display = "block";
+    let specPassager = document.getElementsByClassName("specPassager");
+
+    for(let i = 0; i < specPassager.length; i++){
+        specPassager[i].style.display = "none";
+    }
 
     document.getElementById("nb").textContent = carteVehicule.quantite;
-    //document.getElementById("categorie").textContent =                                //CATÉGORIE 4 ??????????????????????????????????
     document.getElementById("prix").textContent = carteVehicule.prix + "€";
+
+    if(carteVehicule.code == "trot"){
+        document.getElementById("categorie").textContent = "Trotinette";
+    }
+    else{
+        document.getElementById("categorie").textContent = "Catégorie " + (carteVehicule.code).substr(3,3);
+    }
+
+    let tabNombre = document.getElementsByClassName("nombre");
+
+    for(let i = 0; i < tabNombre.length; i++){
+        tabNombre[i].style.display = "block";
+    }
+
 
 }
 
 function changerPassagerEnPlus(){
 
-    index = index + 1;
-    chargerCarte();
+    if(index < (carte.nbPassagers + carte.nbVehicules)){
+        index = index + 1;
+        chargerCarte();
+    }
+    else{
+        alert("Plus rien après ce point.");
+    }
 }
 
 function changerPassagerEnMoins(){
@@ -95,129 +129,7 @@ function changerPassagerEnMoins(){
         chargerCarte();
     }
     else{
-        alert("Plus de passagers avant ce point.");
+        alert("Plus rien avant ce point.");
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Chargement du JSON
-
-
-/*async function reservation(){
-    const numResa = document.getElementById("numResa").value;
-    const navigation = document.getElementById("navigation");
-
-    if (cartes.length == 0) {
-        await chargerJSON();
-    }
-
-    tabCartesBonnes = [];
-    index = 0;
-
-    cartes.forEach(carte => {
-        if (carte.reservation === numResa) {
-            tabCartesBonnes.push(carte);
-        }
-    });
-
-    if (tabCartesBonnes.length > 0) {
-        navigation.classList.remove("hidden");
-        afficherCarte(0);
-    } else {
-        alert("Aucune réservation trouvée");
-    }
-}
-
-// Navigation gauche / droite
-function initNavigation() {
-    console.log("initNavigation exécuté");
-
-    const fg = document.getElementById("flechegauche");
-    const fd = document.getElementById("flechedroite");
-
-    fg.addEventListener("click", () => {
-    if (index > 0) {
-        index--;
-        afficherCarte(index);
-    }
-    });
-
-    fd.addEventListener("click", () => {
-        if (index < tabCartesBonnes.length - 1) {
-            index++;
-            afficherCarte(index);
-        }
-    });
-}
-
-// Initialisation DOM
-document.addEventListener("DOMContentLoaded", () => {
-    chargerJSON();
-    initNavigation();
-});*/

@@ -329,8 +329,8 @@ a:hover{
     text-align: center;
 }
 
-#nom, #prenom{
-    display:block;
+.specPassager {
+    display: block;
 }
 
 .nombre{
