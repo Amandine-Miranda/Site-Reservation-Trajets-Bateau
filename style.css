@@ -347,4 +347,73 @@ a:hover{
     footer p{
         font-size: 2.5vw;
     }
+
+    #labelResa{
+        content: "Numéro de réservation :";
+    }
+
+    .titreCarteEmbarq{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #logoCAN2{
+        width: 46vw;
+    }
+
+    #containerEmbarq{
+        width: 50vw;
+    }
+
+    #containerEmbarq h1{
+        text-align: center;
+    }
+
+    .colonnes{
+        flex-direction: column;
+        width: 50vw;
+    }
+
+    #colonne1{
+        width: 50vw;
+    }
+
+    #colonne2{
+        width: 50vw;
+    }
+
+    .libelle{
+        width: 23vw;
+        font-size: 15px;
+    }
+
+    .infos{
+        width: 22vw;
+    }
+
+    .infos p{
+        width: 22vw;
+    }
+
+    #qrcode{
+        width: 17vw;
+    }
+
+    .carteEmbarquement{
+        width: 55vw;
+        justify-content: center;
+    }
+
+    #flechegauche, #flechedroite{
+        width: 15vw;
+    }
+
+    #entrerResa > input{
+        padding-left: 13vw;
+        padding-right: 13vw;
+        padding-top: 1vh;
+        padding-bottom: 1vh;
+        border-radius: 50px;
+    }
+
 }
