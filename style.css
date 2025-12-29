@@ -108,7 +108,7 @@ body > * {
         font-size: 2.5vw;
     }
 
-    .carteEmbarquement {
+    .bgBox {
         width: 75vw;
         flex-direction: column;
     }
@@ -124,7 +124,7 @@ body > * {
     display: none;
 }
 
-.carteEmbarquement{
+.bgBox {
     width: 50vw;
     background: radial-gradient(circle, rgba(46, 126, 224, 0.671) 66%, rgba(174, 213, 255, 0.664) 100%);
     display: flex;
@@ -140,7 +140,7 @@ body > * {
     margin-bottom: 7vh;
 }
 
-.carteEmbarquement h1{
+.bgBox h1{
     font-size: 25px;
     color: #fff;
 }
@@ -148,7 +148,6 @@ body > * {
 .colonnes{
     display: flex;
     flex-direction: row;
-    width: inherit;
     justify-content: inherit;
 }
 
@@ -337,6 +336,140 @@ a:hover{
     display: none;
 }
 
+#logoFacture {
+    width: 20vw;
+    background-color: #fff;
+    padding: 2vw;
+    border-radius: 50px;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#bgBoxFacture{
+    margin-top: 10vh;
+    width: 75vw;
+    background-color: #fff;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#bgBoxFacture h2 {
+    font-size: 20px;
+    color:#000;
+    text-decoration: underline;
+}
+
+#infosResaFacture{
+    display: flex;
+    flex-direction: column;
+    align-self: baseline;
+    margin-left: 7%;
+    margin-right: 7%;
+    width: 86%;
+}
+
+#infosResaFacture p {
+    color:#000;
+    font-size: 15px;
+}
+
+#infosResaFacture #colonne1 {
+    width: 60vw;
+}
+
+#infosResaFacture .colonnes {
+    flex-direction: column;
+}
+
+.colonne{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.colonne .libelle, .colonne .infos {
+    width: auto;
+    margin-bottom: auto;
+    margin-top: 1vh;
+}
+
+#infosResaFacture .libelle{
+    font-weight: bold;
+}
+
+table{
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+table, tr > *{
+    border: 1px solid black;
+    width: fit-content;
+    padding: 1vw;
+    align-self: center;
+}
+
+td{
+    text-align: center;
+}
+
+tbody td:first-child{
+    text-align: left;
+    padding-left: 1vw;
+}
+
+.tabFacture {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    padding: 1vw;
+    align-self: center;
+}
+
+.total {
+    display: flex;
+    align-self: flex-end;
+}
+
+.total p {
+    width: auto;
+}
+
+#infosResaFacture #prixTotal {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5vh;
+}
+
+#infosResaFacture.hidden{
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media (max-width: 600px){
     #logoCAN {
         width: 50vw;
@@ -399,7 +532,7 @@ a:hover{
         width: 17vw;
     }
 
-    .carteEmbarquement{
+    .bgBox {
         width: 55vw;
         justify-content: center;
     }
