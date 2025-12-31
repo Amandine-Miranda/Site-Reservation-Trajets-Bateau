@@ -30,7 +30,7 @@
                 <img src="CAN.png" alt="logoCAN" id="logoFacture">
                 <h2> Facture </h2>
                 <div id="infosResaFacture" class="hidden">
-                    <p> Illkirch le 20/10/2025 </p> <!-- Comment trouver la date et l'endroit à laquelle la réservation à été faite ?? Peut être juste mettre la date du jour et Illkirch, vu qu'on consulte la facture à ce jour-ci et que le site sera uniquement consulté à Illkirch... -->
+                    <p id="LieuDate"> </p> <!-- Comment trouver la date et l'endroit à laquelle la réservation à été faite ?? Peut être juste mettre la date du jour et Illkirch, vu qu'on consulte la facture à ce jour-ci et que le site sera uniquement consulté à Illkirch... -->
                 
                     <div class="colonnes">
                         <div class="colonne">
@@ -81,26 +81,32 @@
                                 <tr>
                                     <td> Adulte 26 ans et plus </td>
                                     <td id="nbAdultes"> </td>
-                                    <td> 18.75 </td>
+                                    <td id="prixUnitAdultes"> </td>
                                     <td id="prixAdultes"> </td>
                                 </tr>
-                                <tr>
+                                <tr id="ligneJeunes" class="hidden">
                                     <td> Jeune 18 à 25 ans inclus </td>
                                     <td id="nbJeunes"> </td>
-                                    <td> 13.80 </td>
+                                    <td id="prixUnitJeunes"> </td>
                                     <td id="prixJeunes"> </td>
                                 </tr>
-                                <tr>
+                                <tr id="ligneEnfants" class="hidden">
                                     <td> Enfant 4 à 17 ans inclus </td>
                                     <td id="nbEnfants"> </td>
-                                    <td> 11.25 </td>
+                                    <td id="prixUnitEnfants"> </td>
                                     <td id="prixEnfants"> </td>
                                 </tr>
-                                <tr>
+                                <tr id="ligneBebes" class="hidden">
                                     <td> Bébé de moins de 4 ans </td>
                                     <td id="nbBebes"> </td>
                                     <td> Gratuit </td>
                                     <td> 0 </td>
+                                </tr>
+                                <tr id="ligneAnimaux" class="hidden">
+                                    <td> Animal de compagnie </td>
+                                    <td id="nbAnimaux"> </td>
+                                    <td> 3.35 </td>
+                                    <td id="prixAnimaux"> </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -125,28 +131,82 @@
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td> Catégorie 4 plus de 4.80 m </td>
-                                    <td> 1 </td>
-                                    <td> 210.90 </td>
-                                    <td> 210.90 </td>
-                                </tr>
-                                <tr>
+                                <tr id="ligneTrot" class="hidden">
                                     <td> Trottinette électrique </td>
-                                    <td> 2 </td>
-                                    <td> 4.70 </td>
-                                    <td> 9.40 </td>
+                                    <td id="nbTrot"> </td>
+                                    <td id="prixUnitTrot"> </td>
+                                    <td id="prixTotalTrot"> </td>
+                                </tr>
+                                <tr id="ligneVelo" class="hidden">
+                                    <td> Vélo ou remorque à vélo </td>
+                                    <td id="nbVelo"> </td>
+                                    <td id="prixUnitVelo"> </td>
+                                    <td id="prixTotalVelo"> </td>
+                                </tr>
+                                <tr id="ligneVeloElec" class="hidden">
+                                    <td> Vélo électrique </td>
+                                    <td id="nbVeloElec"> </td>
+                                    <td id="prixUnitVeloElec"> </td>
+                                    <td id="prixTotalVeloElec"> </td>
+                                </tr>
+                                <tr id="ligneGrosVelo" class="hidden">
+                                    <td> Vélo cargo ou tandem </td>
+                                    <td id="nbGrosVelo"> </td>
+                                    <td id="prixUnitGrosVelo"> </td>
+                                    <td id="prixTotalGrosVelo"> </td>
+                                </tr>
+                                <tr id="ligneMobil" class="hidden">
+                                    <td> Deux-roues <= 125 cm3 </td>
+                                    <td id="nbMobil"> </td>
+                                    <td id="prixUnitMobil"> </td>
+                                    <td id="prixTotalMobil"> </td>
+                                </tr>
+                                <tr id="ligneMoto" class="hidden">
+                                    <td> Deux-roues > 125 cm3 </td>
+                                    <td id="nbMoto"> </td>
+                                    <td id="prixUnitMoto"> </td>
+                                    <td id="prixTotalMoto"> </td>
+                                </tr>
+                                <tr id="ligneAutoCat1" class="hidden">
+                                    <td> Voiture moins de 4 m </td>
+                                    <td id="nbAutoCat1"> </td>
+                                    <td id="prixUnitAutoCat1"> </td>
+                                    <td id="prixTotalAutoCat1"> </td>
+                                </tr>
+                                <tr id="ligneAutoCat2" class="hidden">
+                                    <td> Voiture de 4 m à 4.39 m </td>
+                                    <td id="nbAutoCat2"> </td>
+                                    <td id="prixUnitAutoCat2"> </td>
+                                    <td id="prixTotalAutoCat2"> </td>
+                                </tr>
+                                <tr id="ligneAutoCat3" class="hidden">
+                                    <td> Voiture de 4.40 m à 4.79 m </td>
+                                    <td id="nbAutoCat3"> </td>
+                                    <td id="prixUnitAutoCat3"> </td>
+                                    <td id="prixTotalAutoCat3"> </td>
+                                </tr>
+                                <tr id="ligneAutoCat4" class="hidden">
+                                    <td> Voiture de 4.80 m ou plus </td>
+                                    <td id="nbAutoCat4"> </td>
+                                    <td id="prixUnitAutoCat4"> </td>
+                                    <td id="prixTotalAutoCat4"> </td>
+                                </tr>
+                                <tr id="ligneCampCar" class="hidden">
+                                    <td> Camping-Car - véhicule de plus de 2.10 m de haut </td>
+                                    <td id="nbCampCar"> </td>
+                                    <td id="prixUnitCampCar"> </td>
+                                    <td id="prixTotalCampCar"> </td>
                                 </tr>
                             </tbody>
                         </table>
 
                         <div class="total">
                             <p class="libelle"> Sous-total véhicules : &nbsp</p>
-                            <p class="infos"> 215.60€ </p>
+                            <p id="prixTotalVehicules" class="infos">  </p>
                         </div>
                     </div>
 
-                    <p id="prixTotal"> Prix total : 0€ </p>
+                    <p id="prixTotal"> Prix Total : 0€ </p>
                 </div>
             </div>
 

@@ -289,6 +289,7 @@ a:hover{
 }
 
 #entrerResa{
+    margin-top: 5vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -350,7 +351,8 @@ main{
 }
 
 #bgBoxFacture{
-    margin-top: 10vh;
+    margin-top: 5vh;
+    margin-bottom: 10vh;
     width: 75vw;
     background-color: #fff;
     border-radius: 50px;
@@ -360,7 +362,7 @@ main{
 }
 
 #bgBoxFacture h2 {
-    font-size: 20px;
+    font-size: 25px;
     color:#000;
     text-decoration: underline;
 }
@@ -376,7 +378,7 @@ main{
 
 #infosResaFacture p {
     color:#000;
-    font-size: 15px;
+    font-size: 17px;
 }
 
 #infosResaFacture #colonne1 {
@@ -405,7 +407,7 @@ main{
 
 table{
     border-collapse: collapse;
-    font-size: 15px;
+    font-size: 17px;
 }
 
 table, tr > *{
@@ -442,17 +444,15 @@ tbody td:first-child{
 }
 
 #infosResaFacture #prixTotal {
-    font-size: 18px;
+    font-size: 23px;
     font-weight: bold;
     text-align: center;
     margin-bottom: 5vh;
 }
 
-#infosResaFacture.hidden{
+.hidden{
     display: none;
 }
-
-
 
 
 
