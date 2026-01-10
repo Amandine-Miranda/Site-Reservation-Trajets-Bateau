@@ -329,6 +329,47 @@ a:hover{
     text-align: center;
 }
 
+#entrerLiaison{
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#entrerLiaison > *{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+#entrerLiaison > label {
+    padding: 1vw;
+    background-color: #ffffffc4;
+    border-radius: 50px;
+    width: 60vw;
+    font-size: 18px;
+    text-align: center;
+}
+
+#entrerLiaison > input{
+    font-size: 16px;
+    background-color: #ffffffc4;
+    appearance: none;
+    border-radius: 15px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 0.4vh;
+    padding-bottom: 0.4vh;
+}
+
+
+#entrerLiaison > input {
+    padding: 0.7vw;
+    border-radius: 25px;
+    font-size: 18px;
+    text-align: center;
+}
+
 .specPassager {
     display: block;
 }
@@ -426,7 +467,7 @@ tbody td:first-child{
     padding-left: 1vw;
 }
 
-.tabFacture {
+#tab {
     display: flex;
     flex-direction: column;
     width: fit-content;
@@ -454,17 +495,58 @@ tbody td:first-child{
     display: none;
 }
 
+#bgBoxTableauBord{
+    margin-top: 5vh;
+    margin-bottom: 10vh;
+    width: 75vw;
+    background-color: #fff;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 
+#bgBoxTableauBord h2 {
+    font-size: 25px;
+    color:#000;
+    text-decoration: underline;
+}
 
+select {
+    font-size: 18px;
+    padding:1.3vh;
+    border-radius: 50px;
+    background-color: #ffffffce;
+}
 
+#infosTableauBord{
+    flex-direction: column;
+    align-self: baseline;
+    margin-left: 7%;
+    margin-right: 7%;
+    width: 86%;
+}
 
+#infosTableauBord p {
+    color:#000;
+    font-size: 17px;
+}
 
+#infosTableauBord #colonne1 {
+    width: 60vw;
+}
 
+#infosTableauBord .colonnes {
+    flex-direction: column;
+}
 
+table {
+    margin-bottom: 5vh;
+}
 
-
-
-
+#date {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 
 
 
@@ -483,6 +565,10 @@ tbody td:first-child{
 
     #labelResa{
         content: "Numéro de réservation :";
+    }
+
+    #labelLiaison{
+        content: "Liaison :";
     }
 
     .titreCarteEmbarq{
@@ -542,6 +628,14 @@ tbody td:first-child{
     }
 
     #entrerResa > input{
+        padding-left: 13vw;
+        padding-right: 13vw;
+        padding-top: 1vh;
+        padding-bottom: 1vh;
+        border-radius: 50px;
+    }
+
+    #entrerLiaison > input{
         padding-left: 13vw;
         padding-right: 13vw;
         padding-top: 1vh;

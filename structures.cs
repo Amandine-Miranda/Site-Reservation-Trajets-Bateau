@@ -81,7 +81,7 @@ class Structures
                         }
 
 
-                        while(liaisonUtil != 1 && liaisonUtil != 2 && liaisonUtil != 3 && liaisonUtil != 4) //Tant que l'utilisateur n'a pas fait un choix valide (entre 1 et 4)
+                        while(liaisonUtil != 1 && liaisonUtil != 2 && liaisonUtil != 3 && liaisonUtil != 4) //Tant que l'utilisateur n'a pas fait un choix valide (entre 1 et 4)
                         {
                                 Console.WriteLine("Pour quelle liaison voulez-vous réserver ?\n1 - Lorient => Groix\n2 - Groix => Lorient\n3 - Quiberon => Le Palais\n4 - Le Palais => Quiberon");      //Demande à l'utilisateur quelle liaison il veut choisir
                                 liaisonUtil = int.Parse(Console.ReadLine()); //L'enregistre dans liaisonUtil
