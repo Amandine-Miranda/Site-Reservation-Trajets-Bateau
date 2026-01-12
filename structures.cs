@@ -61,7 +61,7 @@ class Structures
                         date = d;
                         heure = h;
                         DateTime localDate = DateTime.Now;
-                        horodatage = localDate.ToString();
+                        horodatage = localDate.ToString("yyyy-MM-dd HH:mm:ss");
                         passagers = new List<Passager>();
                         vehicules = new List<Vehicule>();
                         passagers = pass;
