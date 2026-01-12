@@ -121,11 +121,8 @@ class Structures
                 horaires = new Dictionary<string, List<string>>();   //Initialisation du dictionnaire
 
                 string confirmeRes = "non";     //Variable pour confirmer la réservation, par defaut a "non" pour eviter d'enregister une reservation par accident
-                string confirmeNom = "non";     //Variable pour confirmer le nom , par defaut a "non" pour eviter d'enregister le mauvais nom par accident
                 string dateDepart = null;       // Variable qui stocke le date de départ choisie par l'utilisateur
-                bool dateValide = false;        // Variable permettant de verifier si la date de depart entrée est valide , initialisée a faux car au début du code aucune date n'est rentrée
                 string horaireDepart = null;    // Variable qui stocke l'heure choisie par l'utilisateur
-                bool horaireValide = false;     // Variable permettant de verifier si l'heure de depart entrée est valide , initialisée a faux car au début du code aucune heure n'est rentrée
                 List<Passager> passagers = new List<Passager>();        // on declare la liste des passagers
                 List<Vehicule> vehicules = new List<Vehicule>();        // on declare la liste des vehicules
 
@@ -133,108 +130,14 @@ class Structures
                 {
                         //on reinitialise les variables changées dans cette boucle au cas où on boucle
                         liaisonUtil = 0;        //on réinitialise la liaison choisie pour que l'utilisateur puisse re-choisir sa liaison  
-                        confirmeNom = "non"; 	// on invalide le choix du nom pour que l'utilisateur puisse en saisir un nouveau
                         passagers = new List<Passager>();
                         vehicules = new List<Vehicule>();
-                        while (!(confirmeNom.ToLower().Contains("oui")))       //Tant que le nom n'est pas confirmé
-                        {
-                                Console.WriteLine("Quel est le nom de votre réservation ?");    //Demande le nom pour la réservation
-                                nomResaUtil = Console.ReadLine();       //L'enregistre dans nomResaUtil
-                                Console.WriteLine("Est-ce le bon nom de réservation : " + nomResaUtil + " ? ( oui/non )");  //Demande si le nom est le bon
-                                confirmeNom = Console.ReadLine();   //Enregistre la réponse dans confirmeNom
-                        }
 
-                        while (liaisonUtil != 1 && liaisonUtil != 2 && liaisonUtil != 3 && liaisonUtil != 4) //Tant que l'utilisateur n'a pas fait un choix valide (entre 1 et 4)
-                        {
-                                Console.WriteLine("Pour quelle liaison voulez-vous réserver ?\n1 - Lorient => Groix\n2 - Groix => Lorient\n3 - Quiberon => Le Palais\n4 - Le Palais => Quiberon");      //Demande à l'utilisateur quelle liaison il veut choisir
-                                liaisonUtil = int.Parse(Console.ReadLine()); //L'enregistre dans liaisonUtil
-                                if (liaisonUtil == 1) //Si liaisonUtil est égal à 1 (si l'utilisateur à choisi la liaison Lorient => Groix)
-                                {
-                                        horaires = creerLorientGroix(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
-                                        Console.WriteLine("Horaires pour Lorient => Groix :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
-                                }
-
-                                else if (liaisonUtil == 2) //Si liaisonUtil est égal à 2 (si l'utilisateur à choisi la liaison Groix => Lorient)
-                                {
-                                        horaires = creerGroixLorient(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
-                                        Console.WriteLine("Horaires pour Groix => Lorient :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
-                                }
-
-                                else if (liaisonUtil == 3) //Si liaisonUtil est égal à 3 (si l'utilisateur à choisi la liaison Quiberon => Le Palais)
-                                {
-                                        horaires = creerQuiberonPalais(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
-                                        Console.WriteLine("Horaires pour Quiberon => Le Palais :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
-                                }
-
-                                else if (liaisonUtil == 4) //Si liaisonUtil est égal à 4 (si l'utilisateur à choisi la liaison Le Palais => Quiberon)
-                                {
-                                        horaires = creerPalaisQuiberon(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
-                                        Console.WriteLine("Horaires pour Le Palais => Quiberon :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
-                                }
-
-                                else //Sinon, c'est que l'utilisateur à entré un chiffre non valide
-                                {
-                                        Console.WriteLine("Veuillez réessayez en entrant un chiffre entre 1 et 4"); // On en l'informe
-                                }
-                        }
-
-                        foreach (string jour in horaires.Keys) //Pour chaque clé (jour) du dictionnaire des horaires du mois de novembre
-                        {
-                                Console.Write(jour + " : "); //On affiche la clé avec un : pour bien espacer
-                                foreach (string heure in horaires[jour]) // Pour chaque valeur de chaque clé dans le dictionnaire des horaire
-                                {
-                                        Console.Write(heure + " | "); // On affiche cette valeur (l'heure) avec un | pour bien les séparer
-                                }
-                                Console.WriteLine("\n"); //Retour à la ligne à chaque jour pour améliorer la lisibilité
-                        }
-
-                        while (!dateValide) // boucle verifiant que la date entrée est valide
-                        {
-                                Console.WriteLine("Choisissez votre date de départ. "); //Demande à l'utilisateur de choisir une date de départ à partir de la liste de jours proposés précédemment
-                                dateDepart = Console.ReadLine().ToUpper(); //Stocke la réponse de l'utilisateur et la mets en majuscule pour chercher plus facilement dans le dictionnaire des horaires
-                                foreach (string date in horaires.Keys) //parcoure les clefs du dictionnaire horaires qui sont des dates 
-                                {
-
-                                        if (date == dateDepart)
-                                        {
-                                                dateValide = true; // si la date entrée par l'utilisateur est une clef du dictionnaire horaires alort la date est valide
-                                        }
-
-                                }
-                                if (!dateValide)
-                                {
-                                        Console.WriteLine("Vous avez entré une date ( " + dateDepart + " ) invalide , recommencez."); // previens l'utilisateur que la date qu'il a entré est invalide	
-                                }
-                        }
-
-                        Console.Write("\n" + dateDepart + " : "); //on précise le jour choisit
-                        foreach (string heure in horaires[dateDepart]) // Et pour chaque heure dans le jour
-                        {
-                                Console.Write(heure + " | "); // On l'écrit avec un séparateur pour aérer
-                        }
-                        Console.WriteLine("\n"); // Et on met un retour à la ligne pour aérer (encore)
-
-                        while (!horaireValide) // boucle verifiant que l'horaire entrée est valide
-                        {
-                                Console.WriteLine("Choisissez votre heure de départ . (NN:NN) "); //Demande à l'utilisateur de choisir une date de départ à partir de la liste de jours proposés précédemment
-                                horaireDepart = Console.ReadLine(); //Stocke la réponse de l'utilisateur 
-
-                                foreach (string heure in horaires[dateDepart]) //parcoure les horaires disponibles du jour choisit 
-                                {
-
-                                        if (heure == horaireDepart)
-                                        {
-                                                horaireValide = true; // si l'horaire entrée par l'utilisateur est une valeur du dictionnaire horaires alort l'horaire est valide
-                                        }
-
-                                }
-                                if (!horaireValide)
-                                {
-                                        Console.WriteLine("Vous avez entré une heure ( " + horaireDepart + " ) invalide , recommencez."); // previens l'utilisateur que la date qu'il a entré est invalide  
-                                }
-
-
-                        }
+                        nomResaUtil = reserveNom();
+                        horaires = reserveHoraires();
+                        afficherHoraires(horaires);
+                        dateDepart= reserveDate(horaires);
+                        horaireDepart = reserveHoraireDepart(dateDepart,horaires);
                         passagers = reservePassagers();
                         vehicules = reserveVehicules(catVe);
 
@@ -270,57 +173,25 @@ class Structures
                         if (aller.liaison == 1)
                         {
                                 horaires = creerGroixLorient(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
-                                Console.WriteLine("Horaires pour Groix =>  :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
                         }
                         else if (aller.liaison == 2)
                         {
                                 horaires = creerLorientGroix(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
-                                Console.WriteLine("Horaires pour Lorient => Groix :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
                         }
                         else if (aller.liaison == 3)
                         {
                                 horaires = creerPalaisQuiberon(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
-                                Console.WriteLine("Horaires pour Le Palais => Quiberon :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison           
                         }
 
                         else //Si aller.liason est égal à 4 (si l'utilisateur à choisi la liaison Le Palais => Quiberon)
                         {
                                 horaires = creerQuiberonPalais(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
-                                Console.WriteLine("Horaires pour Quiberon => Le Palais :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
                         }
 
 
-                        foreach (string horaire in horaires.Keys) //Pour chaque clé (jour) du dictionnaire des horaires du mois de novembre
-                        {
-                                Console.Write(horaire + " : "); //On affiche la clé avec un : pour bien espacer
-                                foreach (string heure in horaires[horaire]) // Pour chaque valeur de chaque clé dans le dictionnaire des horaire
-                                {
-                                        Console.Write(heure + " | "); // On affiche cette valeur (l'heure) avec un | pour bien les séparer
-                                }
-                                Console.WriteLine("\n"); //Retour à la ligne à chaque jour pour améliorer la lisibilité
-                        }
-
-
-                        Console.Write("Choisissez votre date de retour : "); //Demande à l'utilisateur de choisir une date de départ à partir de la liste de jours proposés précédemment
-                        dateDepart = Console.ReadLine().ToUpper(); //Stocke la réponse de l'utilisateur et la mets en majuscule pour chercher plus facilement dans le dictionnaire des horaires
-
-                        foreach (string horaire in horaires.Keys) //Pour chaque jour dans le dictionnaire des horaires
-                        {
-                                if (horaire == dateDepart) //Si le jour correspond à celui choisi par l'utilisateur
-                                {
-                                        Console.Write("\n" + horaire + " : "); // Alors on reprécise ce jour
-                                        foreach (string heure in horaires[horaire]) // Et pour chaque heure dans le jour
-                                        {
-                                                Console.Write(heure + " | "); // On l'écrit avec un séparateur pour aérer
-                                        }
-                                        Console.WriteLine("\n"); // Et on met un retour à la ligne pour aérer (encore)
-                                }
-                        }
-
-
-                        Console.WriteLine("Choisissez votre horaire . (NN:NN) "); // On demande à l'utilisateur de choisir une heure de départ parmi celles proposées
-                        horaireDepart = Console.ReadLine(); // On stocke ce choix dans la variable horaireDepart
-
+                        afficherHoraires(horaires);
+                        dateDepart = reserveDate(horaires);
+                        horaireDepart = reserveHoraireDepart(dateDepart, horaires);
                         Console.WriteLine("Confirmez-vous cette reservation ? (oui/non)\nNom : " + nomRes + "\nDate du départ : " + dateDepart + "\nHeure du départ : " + horaireDepart); //On demande à l'utilisateur si sa réservation est bonne
 
                         confirmeRes = Console.ReadLine(); // Et ensuite on stocke sa réponse dans confirmeRes pour sortir du Tant Que si c'est égal à "oui"
@@ -329,6 +200,123 @@ class Structures
                 dateDepart = "2025-11-" + dateDepart;                           // on prepare la date au format json
                 Reservation res = new Reservation(nomRes, aller.liaison, dateDepart, horaireDepart, aller.passagers, aller.vehicules); //On créé la reservation retour
                 return res;
+        }
+
+        public static string reserveNom() // gere la partie nom de la reservation
+        {
+                string confirmeNom = "non";     //Variable pour confirmer le nom , par defaut a "non" pour eviter d'enregister le mauvais nom par accident
+                string nomResaUtil = "";             //Variable du nom
+                while (!(confirmeNom.ToLower().Contains("oui")))       //Tant que le nom n'est pas confirmé
+                {
+                        // on reinitialise les variables au cas ou on boucle
+                        confirmeNom = "non";
+                        nomResaUtil = "";
+
+                        Console.WriteLine("Quel est le nom de votre réservation ?");    //Demande le nom pour la réservation
+                        nomResaUtil = Console.ReadLine();       //L'enregistre dans nomResaUtil
+                        Console.WriteLine("Est-ce le bon nom de réservation : " + nomResaUtil + " ? ( oui/non )");  //Demande si le nom est le bon
+                        confirmeNom = Console.ReadLine();   //Enregistre la réponse dans confirmeNom
+                }
+                return nomResaUtil;
+        }
+
+        public static Dictionary<string, List<string>> reserveHoraires()        // gere la reservation de la liaison
+        {
+                int liaisonUtil = 0;
+                Dictionary<string, List<string>> horaires = new Dictionary<string, List<string>>();
+                while (liaisonUtil != 1 && liaisonUtil != 2 && liaisonUtil != 3 && liaisonUtil != 4) //Tant que l'utilisateur n'a pas fait un choix valide (entre 1 et 4)
+                {
+                        Console.WriteLine("Pour quelle liaison voulez-vous réserver ?\n1 - Lorient => Groix\n2 - Groix => Lorient\n3 - Quiberon => Le Palais\n4 - Le Palais => Quiberon");      //Demande à l'utilisateur quelle liaison il veut choisir
+                        liaisonUtil = int.Parse(Console.ReadLine()); //L'enregistre dans liaisonUtil
+                        if (liaisonUtil == 1) //Si liaisonUtil est égal à 1 (si l'utilisateur à choisi la liaison Lorient => Groix)
+                        {
+                                horaires = creerLorientGroix(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                Console.WriteLine("Horaires pour Lorient => Groix :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
+                        }
+
+                        else if (liaisonUtil == 2) //Si liaisonUtil est égal à 2 (si l'utilisateur à choisi la liaison Groix => Lorient)
+                        {
+                                horaires = creerGroixLorient(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                Console.WriteLine("Horaires pour Groix => Lorient :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
+                        }
+
+                        else if (liaisonUtil == 3) //Si liaisonUtil est égal à 3 (si l'utilisateur à choisi la liaison Quiberon => Le Palais)
+                        {
+                                horaires = creerQuiberonPalais(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                Console.WriteLine("Horaires pour Quiberon => Le Palais :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
+                        }
+
+                        else if (liaisonUtil == 4) //Si liaisonUtil est égal à 4 (si l'utilisateur à choisi la liaison Le Palais => Quiberon)
+                        {
+                                horaires = creerPalaisQuiberon(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                Console.WriteLine("Horaires pour Le Palais => Quiberon :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
+                        }
+
+                        else //Sinon, c'est que l'utilisateur à entré un chiffre non valide
+                        {
+                                Console.WriteLine("Veuillez réessayez en entrant un chiffre entre 1 et 4"); // On en l'informe
+                        }
+                }
+                return horaires;
+
+        }
+
+        public static string reserveDate(Dictionary<string, List<string>> horaires)
+        {
+                bool dateValide = false;        // Variable permettant de verifier si la date de depart entrée est valide , initialisée a faux car au début du code aucune date n'est rentrée
+                string dateDepart = null;       // Variable qui stocke le date de départ choisie par l'utilisateur
+                while (!dateValide) // boucle verifiant que la date entrée est valide
+                {
+                        Console.WriteLine("Choisissez votre date de départ. "); //Demande à l'utilisateur de choisir une date de départ à partir de la liste de jours proposés précédemment
+                        dateDepart = Console.ReadLine().ToUpper(); //Stocke la réponse de l'utilisateur et la mets en majuscule pour chercher plus facilement dans le dictionnaire des horaires
+                        foreach (string date in horaires.Keys) //parcoure les clefs du dictionnaire horaires qui sont des dates 
+                        {
+
+                                if (date == dateDepart)
+                                {
+                                        dateValide = true; // si la date entrée par l'utilisateur est une clef du dictionnaire horaires alort la date est valide
+                                }
+
+                        }
+                        if (!dateValide)
+                        {
+                                Console.WriteLine("Vous avez entré une date ( " + dateDepart + " ) invalide , recommencez."); // previens l'utilisateur que la date qu'il a entré est invalide	
+                        }
+                }
+                return dateDepart;
+        }
+
+        public static string reserveHoraireDepart(string dateDepart,Dictionary<string, List<string>> horaires)
+        {
+                string horaireDepart = null; // Variable qui stocke l'heure choisie par l'utilisateur
+                bool horaireValide = false;     // Variable permettant de verifier si l'heure de depart entrée est valide , initialisée a faux car au début du code aucune heure n'est rentrée
+                
+                Console.Write("\n" + dateDepart + " : "); //on précise le jour choisit
+                foreach (string heure in horaires[dateDepart]) // Et pour chaque heure dans le jour
+                {
+                        Console.Write(heure + " | "); // On l'écrit avec un séparateur pour aérer
+                }
+                Console.Write("\n"); // On saute a la prochane ligne pour faire propre
+                while (!horaireValide) // boucle verifiant que l'horaire entrée est valide
+                {
+                        Console.WriteLine("Choisissez votre heure de départ . (NN:NN) "); //Demande à l'utilisateur de choisir une date de départ à partir de la liste de jours proposés précédemment
+                        horaireDepart = Console.ReadLine(); //Stocke la réponse de l'utilisateur 
+
+                        foreach (string heure in horaires[dateDepart]) //parcoure les horaires disponibles du jour choisit 
+                        {
+
+                                if (heure == horaireDepart)
+                                {
+                                        horaireValide = true; // si l'horaire entrée par l'utilisateur est une valeur du dictionnaire horaires alort l'horaire est valide
+                                }
+
+                        }
+                        if (!horaireValide)
+                        {
+                                Console.WriteLine("Vous avez entré une heure ( " + horaireDepart + " ) invalide , recommencez."); // previens l'utilisateur que la date qu'il a entré est invalide  
+                        }
+                }
+                return horaireDepart;
         }
 
         public static List<Passager> reservePassagers() // gère la partie passagers de la reservation
@@ -384,6 +372,8 @@ class Structures
                 }
                 return passagers;
         }
+
+
 
         public static string getCatPassager(int age)    //renvoie la catégorie du passager calculée a partir de son age
         {
@@ -505,6 +495,38 @@ class Structures
         }
 
 
+
+
+        public static void clearFichier(string fichier)     //vide le fichier passé en paramètre
+        {
+                if (File.Exists(fichier))               // si le fichier existe
+                {
+                        File.WriteAllText(fichier, string.Empty);       //on remplace son contenu par un string vide
+                }
+                else File.Create(fichier);              // sinon on créé le fichier ( sans le vider car il est vide de base)
+        }
+        
+
+
+        ////////////////////////////////////////////////////// fonctions d'affichage ///////////////////////////////////////////////////////////////////////
+
+
+        
+        public static void afficherHoraires(Dictionary<string, List<string>> horaires)
+        {
+                foreach (string jour in horaires.Keys) //Pour chaque clé (jour) du dictionnaire des horaires du mois de novembre
+                {
+                        Console.Write(jour + " : "); //On affiche la clé avec un : pour bien espacer
+                        foreach (string heure in horaires[jour]) // Pour chaque valeur de chaque clé dans le dictionnaire des horaire
+                        {
+                                Console.Write(heure + " | "); // On affiche cette valeur (l'heure) avec un | pour bien les séparer
+                        }
+                        Console.WriteLine("\n"); //Retour à la ligne à chaque jour pour améliorer la lisibilité
+                }
+        }
+
+        
+
         public static void afficher(string fichier)
         {
                 if (File.Exists(fichier))
@@ -525,14 +547,6 @@ class Structures
 
         }
 
-        public static void clearFichier(string fichier)     //vide le fichier passé en paramètre
-        {
-                if (File.Exists(fichier))               // si le fichier existe
-                {
-                        File.WriteAllText(fichier, string.Empty);       //on remplace son contenu par un string vide
-                }
-                else File.Create(fichier);              // sinon on créé le fichier ( sans le vider car il est vide de base)
-        } 
 
         //////////////////////////////////////////////////////////////////////fonctions de sauvegardes///////////////////////////////////	
 
