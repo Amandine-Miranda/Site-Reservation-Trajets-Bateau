@@ -3,6 +3,15 @@ using System.Diagnostics;
 using System.IO;
 using System.Collections.Generic;
 
+
+
+//
+//si des variables sont initialisées a null , 0,"" ect , c'est pour eviter certains bugs. on sait qu'on est pas obligés de leur assigner une valeur quand on les declare
+//
+
+
+
+
 class Structures
 {
         public struct Passager
@@ -21,7 +30,7 @@ class Structures
 
         }
 
-	public struct Vehicule
+        public struct Vehicule
         {
                 public string categorie;       //categorie du vehicule ex : "cat4"
                 public int quantite;	       //quantite de vehicules de cette categorie ex : 1
@@ -34,7 +43,7 @@ class Structures
                 }
 
 
-	}
+        }
         public struct Reservation
         {
                 public string nom;      //nom de la reservation 
@@ -51,24 +60,25 @@ class Structures
                         liaison = l;
                         date = d;
                         heure = h;
-                        horodatage = "vide pour l'instant";
+                        DateTime localDate = DateTime.Now;
+                        horodatage = localDate.ToString();
                         passagers = new List<Passager>();
                         vehicules = new List<Vehicule>();
                         passagers = pass;
                         vehicules = vehi;
                 }
         }
-        
-        
 
-	public static void Main()
+
+
+        public static void Main()
         {
                 string fichierSauvegarde = "res.json"; // fichier dans lequel on sauvegarde les reservations
 
-		Dictionary<string, Dictionary<string, float>> catPass;
-		catPass = new Dictionary<string, Dictionary<string, float>>();
-		// dictionnaire contenant des dictionnaires contenant les prix par catégorie de passagers par traversée
-		Dictionary<string, Dictionary<string, float>> catVe;
+                Dictionary<string, Dictionary<string, float>> catPass;
+                catPass = new Dictionary<string, Dictionary<string, float>>();
+                // dictionnaire contenant des dictionnaires contenant les prix par catégorie de passagers par traversée
+                Dictionary<string, Dictionary<string, float>> catVe;
                 catVe = new Dictionary<string, Dictionary<string, float>>();
                 // dictionnaire contenant des dictionnaires contenant les prix par catégorie de vehicule par traversee
 
@@ -81,28 +91,28 @@ class Structures
                 Console.WriteLine("Bonjour, voulez vous reserver ? (oui/non)"); // on demande a l'utilisateur s'il veut reserver ( au cas où on developpe d'autres fonctionnalitées plus tard)
                 if (Console.ReadLine() == "oui")
                 {
+                        clearFichier(fichierSauvegarde);    // on prepare le fichier a la sauvegarde de la reservation
                         debutSauvegarde(fichierSauvegarde);
                         reservationClient = reserver(catPass, catVe);   // on permet a l'utilisateur de reserver
-                        sauvegardeRes(reservationClient,fichierSauvegarde);               // on enregistre sa reservation
+                        sauvegardeRes(reservationClient, fichierSauvegarde);               // on enregistre sa reservation
                         prixTotal = calculPrix(reservationClient, catPass, catVe);      // on met a jour le prix de sa reservation
                         Console.WriteLine("Voulez vous reserver votre retour ? (oui/non)");     // on demande a l'utilisateur s'il veut reserver son retour
                         if (Console.ReadLine() == "oui")                                        // si l'utilisateur veut reserver
                         {
                                 prepareSauvegardeRetour(fichierSauvegarde);
                                 reservationRetourClient = reserverRetour(reservationClient);    // on lance la reservation du retour 
-                                sauvegardeRes(reservationRetourClient,fichierSauvegarde);
+                                sauvegardeRes(reservationRetourClient, fichierSauvegarde);
                                 prixTotal += calculPrix(reservationClient, catPass, catVe);     // le prix du retour est le même que l'aller (même tarifs,memes passagers et memes vehicules)
                         }
                 }
                 finSauvegarde(fichierSauvegarde);
-                afficher(fichierSauvegarde);  
+                afficher(fichierSauvegarde);
                 Console.WriteLine("Voici un récapitulatif de votre reservation");        // on affiche le fichier json par flemme de faire un truc propre, ça respecte la consigne et on verra après si on a le temps de faire mieu
-
                 Console.WriteLine("Vous avez reserver pour un total de : " + prixTotal + "€.");        // on affiche le prix des reservations de l'utilisateur
                 Console.WriteLine("Au revoir");
-	}
+        }
 
-        public static Reservation reserver(Dictionary<string, Dictionary<string, float>> catPass , Dictionary<string, Dictionary<string, float>> catVe) //gère la reservation
+        public static Reservation reserver(Dictionary<string, Dictionary<string, float>> catPass, Dictionary<string, Dictionary<string, float>> catVe) //gère la reservation
         {
 
                 string nomResaUtil = null;     //Nom entré par l'utilisateur pour la réservation
@@ -110,33 +120,29 @@ class Structures
                 Dictionary<string, List<string>> horaires;    //Dictionnaire des horaires en fonction de la liaison choisie
                 horaires = new Dictionary<string, List<string>>();   //Initialisation du dictionnaire
 
-                string confirmeRes = "non";   //Variable pour confirmer la réservation, par defaut a "non" pour eviter d'enregister une reservation par accident
-                string confirmeNom = "non"; //Variable pour confirmer le nom , par defaut a "non" pour eviter d'enregister le mauvais nom par accident
-		string dateDepart = null; // Variable qui stocke le date de départ choisie par l'utilisateur
-                bool dateValide = false; // Variable permettant de verifier si la date de depart entrée est valide , initialisée a faux car au début du code aucune date n'est rentrée
-		string horaireDepart = null; // Variable qui stocke l'heure choisie par l'utilisateur
-		bool horaireValide = false; // Variable permettant de verifier si l'heure de depart entrée est valide , initialisée a faux car au début du code aucune heure n'est rentrée
-                List<Passager> passagers = new List<Passager>();
-                List<Vehicule> vehicules = new List<Vehicule>();
-                
+                string confirmeRes = "non";     //Variable pour confirmer la réservation, par defaut a "non" pour eviter d'enregister une reservation par accident
+                string confirmeNom = "non";     //Variable pour confirmer le nom , par defaut a "non" pour eviter d'enregister le mauvais nom par accident
+                string dateDepart = null;       // Variable qui stocke le date de départ choisie par l'utilisateur
+                bool dateValide = false;        // Variable permettant de verifier si la date de depart entrée est valide , initialisée a faux car au début du code aucune date n'est rentrée
+                string horaireDepart = null;    // Variable qui stocke l'heure choisie par l'utilisateur
+                bool horaireValide = false;     // Variable permettant de verifier si l'heure de depart entrée est valide , initialisée a faux car au début du code aucune heure n'est rentrée
+                List<Passager> passagers = new List<Passager>();        // on declare la liste des passagers
+                List<Vehicule> vehicules = new List<Vehicule>();        // on declare la liste des vehicules
+
                 while (!(confirmeRes.ToLower().Contains("oui")))  //Tant que la réservation n'est pas confirmée
                 {
                         //on reinitialise les variables changées dans cette boucle au cas où on boucle
-                        liaisonUtil = 0; //on réinitialise la liaison choisie pour que l'utilisateur puisse re-choisir sa liaison  
+                        liaisonUtil = 0;        //on réinitialise la liaison choisie pour que l'utilisateur puisse re-choisir sa liaison  
                         confirmeNom = "non"; 	// on invalide le choix du nom pour que l'utilisateur puisse en saisir un nouveau
                         passagers = new List<Passager>();
                         vehicules = new List<Vehicule>();
-			while (!(confirmeNom.ToLower().Contains("oui")))       //Tant que le nom n'est pas confirmé
+                        while (!(confirmeNom.ToLower().Contains("oui")))       //Tant que le nom n'est pas confirmé
                         {
                                 Console.WriteLine("Quel est le nom de votre réservation ?");    //Demande le nom pour la réservation
                                 nomResaUtil = Console.ReadLine();       //L'enregistre dans nomResaUtil
-                                Console.WriteLine("Est-ce le bon nom de réservation : " + nomResaUtil + " ?");  //Demande si le nom est le bon
+                                Console.WriteLine("Est-ce le bon nom de réservation : " + nomResaUtil + " ? ( oui/non )");  //Demande si le nom est le bon
                                 confirmeNom = Console.ReadLine();   //Enregistre la réponse dans confirmeNom
                         }
-
-
-                        // passagers
-
 
                         while (liaisonUtil != 1 && liaisonUtil != 2 && liaisonUtil != 3 && liaisonUtil != 4) //Tant que l'utilisateur n'a pas fait un choix valide (entre 1 et 4)
                         {
@@ -182,43 +188,43 @@ class Structures
                                 Console.WriteLine("\n"); //Retour à la ligne à chaque jour pour améliorer la lisibilité
                         }
 
-			while(!dateValide) // boucle verifiant que la date entrée est valide
-			{
-                        	Console.Write("Choisissez votre date de départ. "); //Demande à l'utilisateur de choisir une date de départ à partir de la liste de jours proposés précédemment
-                        	dateDepart = Console.ReadLine().ToUpper(); //Stocke la réponse de l'utilisateur et la mets en majuscule pour chercher plus facilement dans le dictionnaire des horaires
-				foreach(string date in horaires.Keys) //parcoure les clefs du dictionnaire horaires qui sont des dates 
-				{
-				
-					if(date == dateDepart)
-					{
-						dateValide = true ; // si la date entrée par l'utilisateur est une clef du dictionnaire horaires alort la date est valide
-					}
-				
-				}	
-				if(!dateValide)
-				{
-					Console.WriteLine("Vous avez entré une date ( " + dateDepart + " ) invalide , recommencez."); // previens l'utilisateur que la date qu'il a entré est invalide	
-				}
-			}
+                        while (!dateValide) // boucle verifiant que la date entrée est valide
+                        {
+                                Console.WriteLine("Choisissez votre date de départ. "); //Demande à l'utilisateur de choisir une date de départ à partir de la liste de jours proposés précédemment
+                                dateDepart = Console.ReadLine().ToUpper(); //Stocke la réponse de l'utilisateur et la mets en majuscule pour chercher plus facilement dans le dictionnaire des horaires
+                                foreach (string date in horaires.Keys) //parcoure les clefs du dictionnaire horaires qui sont des dates 
+                                {
+
+                                        if (date == dateDepart)
+                                        {
+                                                dateValide = true; // si la date entrée par l'utilisateur est une clef du dictionnaire horaires alort la date est valide
+                                        }
+
+                                }
+                                if (!dateValide)
+                                {
+                                        Console.WriteLine("Vous avez entré une date ( " + dateDepart + " ) invalide , recommencez."); // previens l'utilisateur que la date qu'il a entré est invalide	
+                                }
+                        }
 
                         Console.Write("\n" + dateDepart + " : "); //on précise le jour choisit
                         foreach (string heure in horaires[dateDepart]) // Et pour chaque heure dans le jour
                         {
-                                        Console.Write(heure + " | "); // On l'écrit avec un séparateur pour aérer
-			}        
+                                Console.Write(heure + " | "); // On l'écrit avec un séparateur pour aérer
+                        }
                         Console.WriteLine("\n"); // Et on met un retour à la ligne pour aérer (encore)
-			
-			while(!horaireValide) // boucle verifiant que l'horaire entrée est valide
+
+                        while (!horaireValide) // boucle verifiant que l'horaire entrée est valide
                         {
-                               	Console.WriteLine("Choisissez votre heure de départ . (NN:NN) "); //Demande à l'utilisateur de choisir une date de départ à partir de la liste de jours proposés précédemment
+                                Console.WriteLine("Choisissez votre heure de départ . (NN:NN) "); //Demande à l'utilisateur de choisir une date de départ à partir de la liste de jours proposés précédemment
                                 horaireDepart = Console.ReadLine(); //Stocke la réponse de l'utilisateur 
-                        
-				foreach(string heure in horaires[dateDepart]) //parcoure les horaires disponibles du jour choisit 
+
+                                foreach (string heure in horaires[dateDepart]) //parcoure les horaires disponibles du jour choisit 
                                 {
 
-                                        if(heure == horaireDepart)
+                                        if (heure == horaireDepart)
                                         {
-                                                horaireValide = true ; // si l'horaire entrée par l'utilisateur est une valeur du dictionnaire horaires alort l'horaire est valide
+                                                horaireValide = true; // si l'horaire entrée par l'utilisateur est une valeur du dictionnaire horaires alort l'horaire est valide
                                         }
 
                                 }
@@ -227,11 +233,12 @@ class Structures
                                         Console.WriteLine("Vous avez entré une heure ( " + horaireDepart + " ) invalide , recommencez."); // previens l'utilisateur que la date qu'il a entré est invalide  
                                 }
 
-                                passagers = reservePassagers();
-                                vehicules = reserveVehicules(catVe);
-                        }
 
-                        dateDepart = dateDepart.Substring(1,dateDepart.Length-1);        // on récupère le numéro du jour de la reservation
+                        }
+                        passagers = reservePassagers();
+                        vehicules = reserveVehicules(catVe);
+
+                        dateDepart = dateDepart.Substring(1, dateDepart.Length - 1);        // on récupère le numéro du jour de la reservation
                         dateDepart = "2025-11-" + dateDepart;                           // on prepare la date au format json
                         Console.WriteLine("Confirmez-vous cette reservation ? (oui/non)\nNom : " + nomResaUtil + "\nDate du départ : " + dateDepart + "\nHeure du départ : " + horaireDepart); //On demande à l'utilisateur si sa réservation est bonne
 
@@ -270,7 +277,7 @@ class Structures
                                 horaires = creerLorientGroix(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
                                 Console.WriteLine("Horaires pour Lorient => Groix :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
                         }
-                        else if (aller.liaison == 3) 
+                        else if (aller.liaison == 3)
                         {
                                 horaires = creerPalaisQuiberon(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
                                 Console.WriteLine("Horaires pour Le Palais => Quiberon :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison           
@@ -318,7 +325,7 @@ class Structures
 
                         confirmeRes = Console.ReadLine(); // Et ensuite on stocke sa réponse dans confirmeRes pour sortir du Tant Que si c'est égal à "oui"
                 }
-                dateDepart = dateDepart.Substring(1, dateDepart.Length-1);        // on récupère le numéro du jour de la reservation
+                dateDepart = dateDepart.Substring(1, dateDepart.Length - 1);        // on récupère le numéro du jour de la reservation
                 dateDepart = "2025-11-" + dateDepart;                           // on prepare la date au format json
                 Reservation res = new Reservation(nomRes, aller.liaison, dateDepart, horaireDepart, aller.passagers, aller.vehicules); //On créé la reservation retour
                 return res;
@@ -328,17 +335,18 @@ class Structures
         {
                 List<Passager> passagers = new List<Passager>();        // initialise la liste qu'on va renvoyer
                 int age = 0;
-                string nomDeFamille=null;
-                string prenom=null;
+                string nomDeFamille = null;
+                string prenom = null;
                 string boucle = "oui"; // variable verifiant si on boucle , initialisée a oui car on veut que la boucle s'execute au moins une fois
                 string valide = "non"; // variable verifiant si les information esntrées sont correctes, initialisée a non car on veut que la boucle s'execute au moins une fois
+
 
                 while (!(boucle.ToLower().Contains("non")))  //Tant que la boucle n'est pas confirmée
                 {
                         //on reinitialise les variables changées dans cette boucle au cas où on boucle
-                        age = 0; 
-                        nomDeFamille=null;
-                        prenom=null;
+                        age = 0;
+                        nomDeFamille = null;
+                        prenom = null;
                         valide = "non";
                         while (!(valide.ToLower().Contains("oui")))     //tant que les informations ne sont pas validées apr l'utilisateur
                         {
@@ -353,7 +361,7 @@ class Structures
                                         nomDeFamille = Console.ReadLine();                      // on l'enregistre
 
                                         Console.WriteLine("votre animal est bien un(e) " + nomDeFamille + " nommé(e) " + prenom + " ? (oui/non)");    // on verifie que les valeurs entrées soient correctes
-                                        valide = Console.ReadLine();
+                                        valide = Console.ReadLine();    //on stocke la reponse dans la variable valide
 
                                 }
                                 else
@@ -377,11 +385,11 @@ class Structures
                 return passagers;
         }
 
-        public static string getCatPassager(int age)
+        public static string getCatPassager(int age)    //renvoie la catégorie du passager calculée a partir de son age
         {
                 string cat;
 
-                if (age < 0)
+                if (age < 0)    // on assigne aux animaux de compagnie un age négatif pour les diferencier des passagers humains et pouvoir récuperer leur catégorie avec cette fonction pour gagner du temps
                 {
                         cat = "ancomp";
                 }
@@ -429,8 +437,8 @@ class Structures
                                                 Console.WriteLine("catégorie \t description");          // on presente a l'utilisateur les différentes catégories pour qu'il puisse choisir a laquelle appartiens son vehicule
                                                 Console.WriteLine("trot\t\t Trottinette électrique");
                                                 Console.WriteLine("velo\t\t Vélo ou remorque à vélo");
-                                                Console.WriteLine("velelec\t Vélo électrique");
-                                                Console.WriteLine("cartand\t Vélo cargo ou tandem");
+                                                Console.WriteLine("velelec\t\t Vélo électrique");
+                                                Console.WriteLine("cartand\t\t Vélo cargo ou tandem");
                                                 Console.WriteLine("mobil\t\t Deux-roues <= 125 cm3");
                                                 Console.WriteLine("moto\t\t Deux-roues > 125 cm3");
                                                 Console.WriteLine("cat1\t\t Voiture moins de 4 m");
@@ -440,19 +448,19 @@ class Structures
                                                 Console.WriteLine("camp\t\t Camping-car - véhicule plus de 2.10 m de haut");
 
                                                 Console.WriteLine("Quel est la catégorie de votre vehicule ?");         // on demande a l'utilisateur la catégorie de son vehicule
-                                                choixCat = (Console.ReadLine());                                            // on l'enregistre
-                                                foreach (string cat in catVe.Keys)    // on parcoure les categories de vehicules
+                                                choixCat = (Console.ReadLine());                                        // on l'enregistre
+                                                foreach (string cat in catVe.Keys)      // on parcoure les categories de vehicules
                                                 {
-                                                        if (choixCat == cat)
+                                                        if (choixCat == cat)            // si le choix de l'utilisateur correspond a une catégorie
                                                         {
-                                                                catValide = true;
+                                                                catValide = true;       // son choix est valide
                                                         }
                                                 }
                                         }
                                         Console.WriteLine("Pour combiens de vehicules de cette catégorie souhaitez-vous reserver ? ( 1/2/3/... )");    // on demande combiens de vehicules de cette catégorie l'utilisateur veut réserver
                                         qtt = int.Parse(Console.ReadLine());      // on enregistre combiens de vehicules de cette catégorie l'utilisateur veut réserver
                                         Console.WriteLine("vous avez réservé pour " + qtt + " " + choixCat + " ? (oui/non)");    // on verifie que les valeurs entrées soient correctes
-                                        valide = Console.ReadLine();
+                                        valide = Console.ReadLine();    // on enregistre la reponse de l'utilisateur dan la variable valide
 
                                 }
                                 Vehicule nouveauVehicule = new Vehicule(choixCat, qtt);     // on créé une reservation de vehicule avec les informations fournies par l'utilisateur
@@ -460,12 +468,12 @@ class Structures
                                 Console.WriteLine("Voulez vous rajouter un vehicule a votre reservation ? (oui/non)");    // on demande au passager si il souhaite rajouter un vehicule a sa réservation
                                 boucle = Console.ReadLine();    // on l'enregistre dans la variable boucle
                         }
-                }        
+                }
                 return vehicules;
         }
 
 
-        public static float calculPrix(Reservation res, Dictionary<string, Dictionary<string, float>> catPass, Dictionary<string, Dictionary<string, float>> catVe)
+        public static float calculPrix(Reservation res, Dictionary<string, Dictionary<string, float>> catPass, Dictionary<string, Dictionary<string, float>> catVe)     //renvoie de cout d'une reservation 
         {
                 float prix = 0;
 
@@ -517,11 +525,20 @@ class Structures
 
         }
 
+        public static void clearFichier(string fichier)     //vide le fichier passé en paramètre
+        {
+                if (File.Exists(fichier))               // si le fichier existe
+                {
+                        File.WriteAllText(fichier, string.Empty);       //on remplace son contenu par un string vide
+                }
+                else File.Create(fichier);              // sinon on créé le fichier ( sans le vider car il est vide de base)
+        } 
 
         //////////////////////////////////////////////////////////////////////fonctions de sauvegardes///////////////////////////////////	
+
         public static void debutSauvegarde(string fichier)
         {
-        
+
                 if (File.Exists(fichier))
                 {
                         FileStream fs = new FileStream(fichier, FileMode.Append, FileAccess.Write);
@@ -532,9 +549,9 @@ class Structures
                 }
                 else Console.WriteLine("error: " + fichier + " not found");
         }
-        public static void sauvegardeRes(Reservation res,string fichier)
+        public static void sauvegardeRes(Reservation res, string fichier)
         {
-                
+
 
                 if (File.Exists(fichier))
                 {
@@ -599,12 +616,12 @@ class Structures
                         writer.Close();
 
                 }
-                else Console.WriteLine("error: " + fichier + " not found");
+                else Console.WriteLine("error: " + fichier + " not found");     
         }
 
         public static void prepareSauvegardeRetour(string fichier)
         {
-                
+
 
                 if (File.Exists(fichier))
                 {
@@ -618,10 +635,10 @@ class Structures
                 else Console.WriteLine("error: " + fichier + " not found");
         }
 
-        
+
         public static void finSauvegarde(string fichier)
         {
-                
+
 
                 if (File.Exists(fichier))
                 {
@@ -635,7 +652,8 @@ class Structures
         }
 
         //////////////////////////////////////////////////////////////////////Init des dicos dégeus///////////////////////////////////	
-
+        //rien d'interessant ici , on initialise des dictionnaires comme des bourrins. 
+        //ceux des prix sont initialisés pas a pas en c# , les liaisons passent par des fichier textes
         public static void initPrix(Dictionary<string, Dictionary<string, float>> catPass, Dictionary<string, Dictionary<string, float>> catVe)
         {
 
@@ -729,27 +747,27 @@ class Structures
         }
 
 
-        public static Dictionary<string,List<string>> creerLorientGroix()
+        public static Dictionary<string, List<string>> creerLorientGroix()
         {
-                Dictionary<string,List<string>> jourB = new Dictionary<string,List<string>>();
-                
+                Dictionary<string, List<string>> jourB = new Dictionary<string, List<string>>();
+
                 FileStream fs = new FileStream("lorientgroix.txt", FileMode.Open, FileAccess.Read);
                 StreamReader lorientgroix = new StreamReader(fs);
-                
-                if(File.Exists("lorientgroix.txt"))
+
+                if (File.Exists("lorientgroix.txt"))
                 {
-                        while(!lorientgroix.EndOfStream)
+                        while (!lorientgroix.EndOfStream)
                         {
-                                string ligne =lorientgroix.ReadLine();
-                                char[] separateur = new char[] {';'};
+                                string ligne = lorientgroix.ReadLine();
+                                char[] separateur = new char[] { ';' };
                                 string[] temp = ligne.Split(separateur);
                                 string[] temp2 = temp[1].Split(" | ");
                                 List<string> tempdic2 = new List<string>();
-                                for(int i =1; i<=temp2.Length-1; i++)
+                                for (int i = 1; i <= temp2.Length - 1; i++)
                                 {
                                         tempdic2.Add(temp2[i]);
                                 }
-                                jourB.Add(temp[0],tempdic2);
+                                jourB.Add(temp[0], tempdic2);
                         }
                 }
                 return jourB;
@@ -757,27 +775,27 @@ class Structures
 
 
 
-        public static Dictionary<string,List<string>> creerGroixLorient()
+        public static Dictionary<string, List<string>> creerGroixLorient()
         {
-                Dictionary<string,List<string>> jourB = new Dictionary<string,List<string>>();
-                
+                Dictionary<string, List<string>> jourB = new Dictionary<string, List<string>>();
+
                 FileStream fs = new FileStream("groixlorient.txt", FileMode.Open, FileAccess.Read);
                 StreamReader groixlorient = new StreamReader(fs);
 
-                if(File.Exists("groixlorient.txt"))
+                if (File.Exists("groixlorient.txt"))
                 {
-                        while(!groixlorient.EndOfStream)
+                        while (!groixlorient.EndOfStream)
                         {
-                                string ligne =groixlorient.ReadLine();
-                                char[] separateur = new char[] {';'};
+                                string ligne = groixlorient.ReadLine();
+                                char[] separateur = new char[] { ';' };
                                 string[] temp = ligne.Split(separateur);
                                 string[] temp2 = temp[1].Split(" | ");
                                 List<string> tempdic2 = new List<string>();
-                                for(int i =1; i<=temp2.Length-1; i++)
+                                for (int i = 1; i <= temp2.Length - 1; i++)
                                 {
                                         tempdic2.Add(temp2[i]);
                                 }
-                                jourB.Add(temp[0],tempdic2);
+                                jourB.Add(temp[0], tempdic2);
                         }
                 }
                 return jourB;
@@ -785,27 +803,27 @@ class Structures
 
 
 
-        public static Dictionary<string,List<string>> creerQuiberonPalais()
+        public static Dictionary<string, List<string>> creerQuiberonPalais()
         {
-                Dictionary<string,List<string>> jourB = new Dictionary<string,List<string>>();
-                
+                Dictionary<string, List<string>> jourB = new Dictionary<string, List<string>>();
+
                 FileStream fs = new FileStream("quiberonpalais.txt", FileMode.Open, FileAccess.Read);
                 StreamReader quiberonpalais = new StreamReader(fs);
 
-                if(File.Exists("quiberonpalais.txt"))
+                if (File.Exists("quiberonpalais.txt"))
                 {
-                        while(!quiberonpalais.EndOfStream)
+                        while (!quiberonpalais.EndOfStream)
                         {
-                                string ligne =quiberonpalais.ReadLine();
-                                char[] separateur = new char[] {';'};
+                                string ligne = quiberonpalais.ReadLine();
+                                char[] separateur = new char[] { ';' };
                                 string[] temp = ligne.Split(separateur);
                                 string[] temp2 = temp[1].Split(" | ");
                                 List<string> tempdic2 = new List<string>();
-                                for(int i =1; i<=temp2.Length-1; i++)
+                                for (int i = 1; i <= temp2.Length - 1; i++)
                                 {
                                         tempdic2.Add(temp2[i]);
                                 }
-                                jourB.Add(temp[0],tempdic2);
+                                jourB.Add(temp[0], tempdic2);
                         }
                 }
                 return jourB;
@@ -814,27 +832,27 @@ class Structures
 
 
 
-        public static Dictionary<string,List<string>> creerPalaisQuiberon()
+        public static Dictionary<string, List<string>> creerPalaisQuiberon()
         {
-                Dictionary<string,List<string>> jourB = new Dictionary<string,List<string>>();
+                Dictionary<string, List<string>> jourB = new Dictionary<string, List<string>>();
 
                 FileStream fs = new FileStream("palaisquiberon.txt", FileMode.Open, FileAccess.Read);
                 StreamReader palaisquiberon = new StreamReader(fs);
 
-                if(File.Exists("palaisquiberon.txt"))
+                if (File.Exists("palaisquiberon.txt"))
                 {
-                        while(!palaisquiberon.EndOfStream)
+                        while (!palaisquiberon.EndOfStream)
                         {
-                                string ligne =palaisquiberon.ReadLine();
-                                char[] separateur = new char[] {';'};
+                                string ligne = palaisquiberon.ReadLine();
+                                char[] separateur = new char[] { ';' };
                                 string[] temp = ligne.Split(separateur);
                                 string[] temp2 = temp[1].Split(" | ");
                                 List<string> tempdic2 = new List<string>();
-                                for(int i =1; i<=temp2.Length-1; i++)
+                                for (int i = 1; i <= temp2.Length - 1; i++)
                                 {
                                         tempdic2.Add(temp2[i]);
                                 }
-                                jourB.Add(temp[0],tempdic2);
+                                jourB.Add(temp[0], tempdic2);
                         }
                 }
                 return jourB;
