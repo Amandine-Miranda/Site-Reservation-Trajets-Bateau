@@ -1,0 +1,18 @@
+A faire la première fois :
+    git config --global user.email "Vous@exemple.com"
+    git config --global user.name "Votre Nom"
+
+git fetch
+git add *nom_fichier_a_envoyer*
+git commit
+    "Demande le message du commit"
+    sauvegarder le message avec control + x
+    "Demande le nom du fichier"
+    juste appuyer sur entrée pour pas tout fuck up
+git push
+
+
+
+si erreur de push :
+git rebase
+
