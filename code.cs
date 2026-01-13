@@ -577,11 +577,11 @@ class Structures
 
                         writer.WriteLine("\t\"reservation\":");        // partie gauche de la paire reservation contenant les informations générales 
                         writer.WriteLine("\t{");                       // les informations générales :
-                        writer.WriteLine("\t\t\"nom\" \"" + res.nom + "\",");
-                        writer.WriteLine("\t\t\"idLiaison\" " + res.liaison + ",");
-                        writer.WriteLine("\t\t\"date\" \"" + res.date + "\",");
-                        writer.WriteLine("\t\t\"heure\" \"" + res.heure + "\",");
-                        writer.WriteLine("\t\t\"horodatage\" \"" + res.horodatage + "\",");
+                        writer.WriteLine("\t\t\"nom\": \"" + res.nom + "\",");
+                        writer.WriteLine("\t\t\"idLiaison\": " + res.liaison + ",");
+                        writer.WriteLine("\t\t\"date\": \"" + res.date + "\",");
+                        writer.WriteLine("\t\t\"heure\": \"" + res.heure + "\",");
+                        writer.WriteLine("\t\t\"horodatage\": \"" + res.horodatage + "\",");
 
                         writer.WriteLine("\t},");                      // fin des informations générales
 
