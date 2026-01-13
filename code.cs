@@ -73,7 +73,7 @@ class Structures
 
         public static void Main()
         {
-                string fichierSauvegarde = "res.json"; // fichier dans lequel on sauvegarde les reservations
+                string fichierSauvegarde = "ressources/res.json"; // fichier dans lequel on sauvegarde les reservations
 
                 Dictionary<string, Dictionary<string, float>> catPass;
                 catPass = new Dictionary<string, Dictionary<string, float>>();
@@ -172,20 +172,20 @@ class Structures
                         /////////////// on choisit la liaison inverse a la place de l'utilisateur pour éviter les erreurs ///////////////
                         if (aller.liaison == 1)
                         {
-                                horaires = creerGroixLorient(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                horaires = creerDicoHoraires("ressources/groixlorient.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
                         }
                         else if (aller.liaison == 2)
                         {
-                                horaires = creerLorientGroix(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                horaires = creerDicoHoraires("ressourceslorientgroix.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
                         }
                         else if (aller.liaison == 3)
                         {
-                                horaires = creerPalaisQuiberon(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                horaires = creerDicoHoraires("ressources/palaisquiberon.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
                         }
 
                         else //Si aller.liason est égal à 4 (si l'utilisateur à choisi la liaison Le Palais => Quiberon)
                         {
-                                horaires = creerQuiberonPalais(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                horaires = creerDicoHoraires("ressources/quiberonpalais.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
                         }
 
 
@@ -230,25 +230,25 @@ class Structures
                         liaisonUtil = int.Parse(Console.ReadLine()); //L'enregistre dans liaisonUtil
                         if (liaisonUtil == 1) //Si liaisonUtil est égal à 1 (si l'utilisateur à choisi la liaison Lorient => Groix)
                         {
-                                horaires = creerLorientGroix(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                horaires = creerDicoHoraires("ressources/lorientgroix.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
                                 Console.WriteLine("Horaires pour Lorient => Groix :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
                         }
 
                         else if (liaisonUtil == 2) //Si liaisonUtil est égal à 2 (si l'utilisateur à choisi la liaison Groix => Lorient)
                         {
-                                horaires = creerGroixLorient(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                horaires = creerDicoHoraires("ressources/groixlorient.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
                                 Console.WriteLine("Horaires pour Groix => Lorient :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
                         }
 
                         else if (liaisonUtil == 3) //Si liaisonUtil est égal à 3 (si l'utilisateur à choisi la liaison Quiberon => Le Palais)
                         {
-                                horaires = creerQuiberonPalais(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                horaires = creerDicoHoraires("ressources/quiberonpalais.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
                                 Console.WriteLine("Horaires pour Quiberon => Le Palais :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
                         }
 
                         else if (liaisonUtil == 4) //Si liaisonUtil est égal à 4 (si l'utilisateur à choisi la liaison Le Palais => Quiberon)
                         {
-                                horaires = creerPalaisQuiberon(); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                horaires = creerDicoHoraires("ressources/palaisquiberon.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
                                 Console.WriteLine("Horaires pour Le Palais => Quiberon :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
                         }
 
@@ -761,18 +761,18 @@ class Structures
         }
 
 
-        public static Dictionary<string, List<string>> creerLorientGroix()
+        public static Dictionary<string, List<string>> creerDicoHoraires(string fichier)
         {
                 Dictionary<string, List<string>> jourB = new Dictionary<string, List<string>>();
 
-                FileStream fs = new FileStream("lorientgroix.txt", FileMode.Open, FileAccess.Read);
-                StreamReader lorientgroix = new StreamReader(fs);
+                FileStream fs = new FileStream(fichier, FileMode.Open, FileAccess.Read);
+                StreamReader trav = new StreamReader(fs);
 
-                if (File.Exists("lorientgroix.txt"))
+                if (File.Exists(fichier))
                 {
-                        while (!lorientgroix.EndOfStream)
+                        while (!trav.EndOfStream)
                         {
-                                string ligne = lorientgroix.ReadLine();
+                                string ligne = trav.ReadLine();
                                 char[] separateur = new char[] { ';' };
                                 string[] temp = ligne.Split(separateur);
                                 string[] temp2 = temp[1].Split(" | ");
@@ -786,90 +786,4 @@ class Structures
                 }
                 return jourB;
         }
-
-
-
-        public static Dictionary<string, List<string>> creerGroixLorient()
-        {
-                Dictionary<string, List<string>> jourB = new Dictionary<string, List<string>>();
-
-                FileStream fs = new FileStream("groixlorient.txt", FileMode.Open, FileAccess.Read);
-                StreamReader groixlorient = new StreamReader(fs);
-
-                if (File.Exists("groixlorient.txt"))
-                {
-                        while (!groixlorient.EndOfStream)
-                        {
-                                string ligne = groixlorient.ReadLine();
-                                char[] separateur = new char[] { ';' };
-                                string[] temp = ligne.Split(separateur);
-                                string[] temp2 = temp[1].Split(" | ");
-                                List<string> tempdic2 = new List<string>();
-                                for (int i = 1; i <= temp2.Length - 1; i++)
-                                {
-                                        tempdic2.Add(temp2[i]);
-                                }
-                                jourB.Add(temp[0], tempdic2);
-                        }
-                }
-                return jourB;
-        }
-
-
-
-        public static Dictionary<string, List<string>> creerQuiberonPalais()
-        {
-                Dictionary<string, List<string>> jourB = new Dictionary<string, List<string>>();
-
-                FileStream fs = new FileStream("quiberonpalais.txt", FileMode.Open, FileAccess.Read);
-                StreamReader quiberonpalais = new StreamReader(fs);
-
-                if (File.Exists("quiberonpalais.txt"))
-                {
-                        while (!quiberonpalais.EndOfStream)
-                        {
-                                string ligne = quiberonpalais.ReadLine();
-                                char[] separateur = new char[] { ';' };
-                                string[] temp = ligne.Split(separateur);
-                                string[] temp2 = temp[1].Split(" | ");
-                                List<string> tempdic2 = new List<string>();
-                                for (int i = 1; i <= temp2.Length - 1; i++)
-                                {
-                                        tempdic2.Add(temp2[i]);
-                                }
-                                jourB.Add(temp[0], tempdic2);
-                        }
-                }
-                return jourB;
-        }
-
-
-
-
-        public static Dictionary<string, List<string>> creerPalaisQuiberon()
-        {
-                Dictionary<string, List<string>> jourB = new Dictionary<string, List<string>>();
-
-                FileStream fs = new FileStream("palaisquiberon.txt", FileMode.Open, FileAccess.Read);
-                StreamReader palaisquiberon = new StreamReader(fs);
-
-                if (File.Exists("palaisquiberon.txt"))
-                {
-                        while (!palaisquiberon.EndOfStream)
-                        {
-                                string ligne = palaisquiberon.ReadLine();
-                                char[] separateur = new char[] { ';' };
-                                string[] temp = ligne.Split(separateur);
-                                string[] temp2 = temp[1].Split(" | ");
-                                List<string> tempdic2 = new List<string>();
-                                for (int i = 1; i <= temp2.Length - 1; i++)
-                                {
-                                        tempdic2.Add(temp2[i]);
-                                }
-                                jourB.Add(temp[0], tempdic2);
-                        }
-                }
-                return jourB;
-        }
-
 }
