@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <title> Tableau de Bord </title>
+        <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+        <video autoplay muted loop id="bg-video">
+        <source src="img/oceanvid3.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas les vidéos HTML5.
+        </video>
+
+        <header class="box">
+            <a href="accueil.html"> <img src="img/CAN.png" id="logoCAN"> </a>
+        </header>
+
+        <main>
+            <div id="entrerLiaison">
+                <label for="liaison" id="labelLiaison"> Sélectionnez la liaison pour laquelle vous voulez voir les informations : </label>
+                <select id="liaison">
+                    <option value="1">Lorient → Groix</option>
+                    <option value="2">Groix → Lorient</option>
+                    <option value="3">Quiberon → Le Palais</option>
+                    <option value="4">Le Palais → Quiberon</option>
+                </select>
+                <br>
+                <label for="date" id="labelDate"> Entrez la date pour laquelle vous voulez voir les informations : </label>
+                <input type="date" id="date" name="date" required minlength="1" maxlength="50">
+                <br>
+                <input type="button" value="Envoyer" onclick="chargerAPI()">
+            </div>
+
+            <div id="bgBoxTableauBord">
+                <img src="img/CAN.png" alt="logoCAN" id="logoFacture">
+                <h2> Tableau de Bord </h2>
+                <div id="infosTableauBord" class="hidden">
+                    <div class="colonnes">
+                        <div class="colonne">
+                            <p class="libelle"> Liaison : &nbsp</p>
+                            <p id="liaisonUtil" class="infos"> </p>
+                        </div>
+                        <div class="colonne">
+                            <p class="libelle"> Date : &nbsp</p>
+                            <p id="dateUtil" class="infos"> </p>
+                        </div>
+
+                        <hr>
+
+                        <div id="tab">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th> Heure Liaison </th>
+                                    <th> Remplissage Passager </th>
+                                    <th> Remplissage Véhicule </th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tableBody">
+                                
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="box2">
+            <p> Compagnie Alsacienne de Navigation, 2025. Tous droits réservés </p>
+        </footer>
+
+        <script src="scripts/calculTableauBord.js"></script>
+    </body>
+</html>

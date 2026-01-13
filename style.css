@@ -1,0 +1,680 @@
+header {
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(0.25turn, #2e7fe0, #fff, #fff, #fff, #2e7fe0);
+    margin: 0px;
+    padding-bottom: 40px;
+}
+
+#logoCAN {
+    max-width: 20vw;
+    max-height: 20vh;
+}
+
+nav{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+}
+
+ul{
+    text-align: center;
+    list-style: none;
+    padding: 7vh 5vw;
+    background-color: #ffffffa8;
+    border:#2e7ee054 5px dashed ;
+    border-radius: 5vw;
+}
+
+li {
+    padding-bottom: 5vh;
+    font-size: 24px;
+}
+
+li:last-child {
+    padding-bottom: 0px;
+}
+
+body{
+    display: flex;
+    margin: 0;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: #2e7ee079;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+main{
+    min-height: 65vh;
+}
+
+.box {
+  --mask:
+    radial-gradient(67.08px at 50% calc(100% - 90px),#000 99%,#0000 101%) calc(50% - 60px) 0/120px 100%,
+    radial-gradient(67.08px at 50% calc(100% + 60px),#0000 99%,#000 101%) 50% calc(100% - 30px)/120px 100% repeat-x;
+  -webkit-mask: var(--mask);
+          mask: var(--mask);
+    background: linear-gradient(0.25turn, #2e7ee0a8,#ffffffad, #ffffffad,#ffffffad, #2e7ee0a8);
+}
+
+.box2 {
+  --mask:
+    radial-gradient(67.08px at 50% 90px,#000 99%,#0000 101%) calc(50% - 60px) 0/120px 100%,
+    radial-gradient(67.08px at 50% -60px,#0000 99%,#000 101%) 50% 30px/120px 100% repeat-x;
+  -webkit-mask: var(--mask);
+          mask: var(--mask);
+    background: linear-gradient(0.25turn, #2e7ee0a8,#ffffffad, #ffffffad,#ffffffad, #2e7ee0a8);
+}
+
+footer{
+    display: flex;
+    padding-top: 50px;
+    justify-content: center;
+    padding-right: 10px;
+}
+
+footer p{
+    color: #13084d;
+    font-style: italic;
+    font-size: 15px;
+}
+
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.6;
+}
+
+body > * {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 600px){
+    #logoCAN {
+        width: 50vw;
+        max-width: 50vw;
+        max-height: 50vh;
+    }
+
+    footer p{
+        font-size: 2.5vw;
+    }
+
+    .bgBox {
+        width: 75vw;
+        flex-direction: column;
+    }
+}
+
+#navigation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#navigation.hidden{
+    display: none;
+}
+
+.bgBox {
+    width: 50vw;
+    background: radial-gradient(circle, rgba(46, 126, 224, 0.671) 66%, rgba(174, 213, 255, 0.664) 100%);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-radius: 4vw;
+    padding-top: 3vh;
+    padding-right: 2vw;
+    padding-bottom: 3vh;
+    padding-left: 2vw;
+    margin-top: 7vh;
+    margin-bottom: 7vh;
+}
+
+.bgBox h1{
+    font-size: 25px;
+    color: #fff;
+}
+
+.colonnes{
+    display: flex;
+    flex-direction: row;
+    justify-content: inherit;
+}
+
+#colonne1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 21vw;
+}
+
+#colonne2{
+    width: 25vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.libelle{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: space-between;
+    font-size: 17px;
+    width: 40%;
+}
+
+.infos{
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    font-weight:normal;
+    align-items: end;
+    justify-content: space-around;
+    width: 40%;
+}
+
+.infos p{
+    background-color: #fff;
+    color:#000;
+    padding:1vh;
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
+    border-radius: 15px;
+    width: 7vw;
+}
+
+.libelle p{
+    font-weight: bold;
+    color:#fff;
+}
+
+.titreCarteEmbarq{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: inherit;
+}
+
+#qrcode{
+    width: 5vw;
+    height: fit-content;
+    padding:0.5vw;
+    border-radius: 25px;
+}
+
+#logoCAN2{
+    width: 17vw;
+    height: max-content;
+    background-color: #fff;
+    border-radius: 40px;
+    padding:1vw;
+    padding-left: 2.08vw;
+    padding-right: 2.08vw;
+}
+
+#containerEmbarq{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 25vw;
+    justify-content: space-between;
+}
+
+#containerEmbarq h1{
+    margin-right: 2.5vw;
+}
+
+hr{
+    border: none;
+    border-top: 3px double #ffffff;
+    color: #ffffff;
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+    width: 100%;
+}
+
+h2{
+    color:#fff;
+    font-size: 20px;
+}
+
+#colonne2 > h2{
+    align-self: center;
+}
+
+#flechegauche, #flechedroite{
+    width: 4vw;
+    height: fit-content;
+    border-radius: 100%;
+    margin: 2vw;
+    box-shadow: 0px 10px 5px rgba(19, 14, 56, 0.493);
+    background: #ffffffb2;
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+}   
+
+#flechegauche:hover, #flechedroite:hover{
+    top: -7px;
+    cursor: pointer;
+}
+
+a{
+    color:#13084d;
+    text-decoration:wavy;
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+}
+
+a:visited{
+    color:#1660bb;
+}
+
+a:hover{
+    top: -7px;
+}
+
+#entrerResa{
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#entrerResa > *{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+#entrerResa > label {
+    padding: 1vw;
+    background-color: #ffffffc4;
+    border-radius: 50px;
+    width: 60vw;
+    font-size: 18px;
+    text-align: center;
+}
+
+#entrerResa > input{
+    font-size: 16px;
+    background-color: #ffffffc4;
+    appearance: none;
+    border-radius: 15px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 0.4vh;
+    padding-bottom: 0.4vh;
+}
+
+
+#entrerResa > #numResa {
+    padding: 0.7vw;
+    border-radius: 25px;
+    font-size: 18px;
+    text-align: center;
+}
+
+#entrerLiaison{
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#entrerLiaison > *{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+#entrerLiaison > label {
+    padding: 1vw;
+    background-color: #ffffffc4;
+    border-radius: 50px;
+    width: 60vw;
+    font-size: 18px;
+    text-align: center;
+}
+
+#entrerLiaison > input{
+    font-size: 16px;
+    background-color: #ffffffc4;
+    appearance: none;
+    border-radius: 15px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 0.4vh;
+    padding-bottom: 0.4vh;
+}
+
+
+#entrerLiaison > input {
+    padding: 0.7vw;
+    border-radius: 25px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.specPassager {
+    display: block;
+}
+
+.nombre{
+    display: none;
+}
+
+#logoFacture {
+    width: 20vw;
+    background-color: #fff;
+    padding: 2vw;
+    border-radius: 50px;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#bgBoxFacture{
+    margin-top: 5vh;
+    margin-bottom: 10vh;
+    width: 75vw;
+    background-color: #fff;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#bgBoxFacture h2 {
+    font-size: 25px;
+    color:#000;
+    text-decoration: underline;
+}
+
+#infosResaFacture{
+    display: flex;
+    flex-direction: column;
+    align-self: baseline;
+    margin-left: 7%;
+    margin-right: 7%;
+    width: 86%;
+}
+
+#infosResaFacture p {
+    color:#000;
+    font-size: 17px;
+}
+
+#infosResaFacture #colonne1 {
+    width: 60vw;
+}
+
+#infosResaFacture .colonnes {
+    flex-direction: column;
+}
+
+.colonne{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.colonne .libelle, .colonne .infos {
+    width: auto;
+    margin-bottom: auto;
+    margin-top: 1vh;
+}
+
+#infosResaFacture .libelle{
+    font-weight: bold;
+}
+
+table{
+    border-collapse: collapse;
+    font-size: 17px;
+}
+
+table, tr > *{
+    border: 1px solid black;
+    width: fit-content;
+    padding: 1vw;
+    align-self: center;
+}
+
+td{
+    text-align: center;
+}
+
+tbody td:first-child{
+    text-align: left;
+    padding-left: 1vw;
+}
+
+#tab {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    padding: 1vw;
+    align-self: center;
+}
+
+.total {
+    display: flex;
+    align-self: flex-end;
+}
+
+.total p {
+    width: auto;
+}
+
+#infosResaFacture #prixTotal {
+    font-size: 23px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5vh;
+}
+
+.hidden{
+    display: none;
+}
+
+#bgBoxTableauBord{
+    margin-top: 5vh;
+    margin-bottom: 10vh;
+    width: 75vw;
+    background-color: #fff;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#bgBoxTableauBord h2 {
+    font-size: 25px;
+    color:#000;
+    text-decoration: underline;
+}
+
+select {
+    font-size: 18px;
+    padding:1.3vh;
+    border-radius: 50px;
+    background-color: #ffffffce;
+}
+
+#infosTableauBord{
+    flex-direction: column;
+    align-self: baseline;
+    margin-left: 7%;
+    margin-right: 7%;
+    width: 86%;
+}
+
+#infosTableauBord p {
+    color:#000;
+    font-size: 17px;
+}
+
+#infosTableauBord #colonne1 {
+    width: 60vw;
+}
+
+#infosTableauBord .colonnes {
+    flex-direction: column;
+}
+
+table {
+    margin-bottom: 5vh;
+}
+
+#date {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#infosStats{
+    flex-direction: column;
+    align-self: baseline;
+    margin-left: 7%;
+    margin-right: 7%;
+    width: 86%;
+    margin-top: 3vh;
+    margin-bottom: 7vh;
+}
+
+#infosStats p {
+    color:#000;
+    font-size: 17px;
+}
+
+#infosStats #colonne1 {
+    width: 60vw;
+}
+
+#infosStats .colonnes {
+    flex-direction: column;
+}
+
+.separation {
+    border-top: 3px double black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 600px){
+    #logoCAN {
+        width: 50vw;
+        max-width: 50vw;
+        max-height: 50vh;
+    }
+
+    footer p{
+        font-size: 2.5vw;
+    }
+
+    #labelResa{
+        content: "Numéro de réservation :";
+    }
+
+    #labelLiaison{
+        content: "Liaison :";
+    }
+
+    .titreCarteEmbarq{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #logoCAN2{
+        width: 46vw;
+    }
+
+    #containerEmbarq{
+        width: 50vw;
+    }
+
+    #containerEmbarq h1{
+        text-align: center;
+    }
+
+    .colonnes{
+        flex-direction: column;
+        width: 50vw;
+    }
+
+    #colonne1{
+        width: 50vw;
+    }
+
+    #colonne2{
+        width: 50vw;
+    }
+
+    .libelle{
+        width: 23vw;
+        font-size: 15px;
+    }
+
+    .infos{
+        width: 22vw;
+    }
+
+    .infos p{
+        width: 22vw;
+    }
+
+    #qrcode{
+        width: 17vw;
+    }
+
+    .bgBox {
+        width: 55vw;
+        justify-content: center;
+    }
+
+    #flechegauche, #flechedroite{
+        width: 15vw;
+    }
+
+    #entrerResa > input{
+        padding-left: 13vw;
+        padding-right: 13vw;
+        padding-top: 1vh;
+        padding-bottom: 1vh;
+        border-radius: 50px;
+    }
+
+    #entrerLiaison > input{
+        padding-left: 13vw;
+        padding-right: 13vw;
+        padding-top: 1vh;
+        padding-bottom: 1vh;
+        border-radius: 50px;
+    }
+
+}
