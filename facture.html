@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <title> Facture </title>
+        <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+        <video autoplay muted loop id="bg-video">
+        <source src="oceanvid3.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas les vidéos HTML5.
+        </video>
+
+        <header class="box">
+            <a href="accueil.html"> <img src="CAN.png" id="logoCAN"> </a>
+        </header>
+
+        <main>
+            <div id="entrerResa">
+                <label for="numResa" id="labelResaFacture"> Entrez le numéro de réservation dont vous voulez voir la facture :</label>
+                <br>
+                <input type="text" id="numResa" name="numResa" required minlength="1" maxlength="7">
+                <input type="button" value="Envoyer" onclick="chargerAPI()">
+            </div>
+
+            <div id="bgBoxFacture">
+                <img src="CAN.png" alt="logoCAN" id="logoFacture">
+                <h2> Facture </h2>
+                <div id="infosResaFacture" class="hidden">
+                    <p id="LieuDate"> </p>
+                
+                    <div class="colonnes">
+                        <div class="colonne">
+                            <p class="libelle"> Réservation n° : &nbsp</p>
+                            <p id="numFacture" class="infos"> </p>
+                        </div>
+                        <div class="colonne">
+                            <p class="libelle"> Nom de réservation : &nbsp</p>
+                            <p id="nomFacture" class="infos"> </p>
+                        </div>
+
+                        <hr>
+
+                        <div class="colonne">
+                            <p class="libelle"> Traversée : &nbsp</p>
+                            <p id="traverseeFacture" class="infos"> </p>
+                        </div>
+                        <div class="colonne">
+                            <p class="libelle"> Date : &nbsp</p>
+                            <p id="dateTraversee" class="infos"> </p>
+                        </div>
+                        <div class="colonne">
+                            <p class="libelle"> Départ : &nbsp</p>
+                            <p id ="heureTraversee" class="infos"> </p>
+                        </div>
+                        <div class="colonne">
+                            <p class="libelle"> Bateau : &nbsp</p>
+                            <p id="bateauTraversee" class="infos"> </p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <p class="libelle"> Les personnes : </p>
+
+                    <div id="tab">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th> Catégorie </th>
+                                    <th> Nombre </th>
+                                    <th> Prix unitaire </th>
+                                    <th> Prix ligne </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td> Adulte 26 ans et plus </td>
+                                    <td id="nbAdultes"> </td>
+                                    <td id="prixUnitAdultes"> </td>
+                                    <td id="prixAdultes"> </td>
+                                </tr>
+                                <tr id="ligneJeunes" class="hidden">
+                                    <td> Jeune 18 à 25 ans inclus </td>
+                                    <td id="nbJeunes"> </td>
+                                    <td id="prixUnitJeunes"> </td>
+                                    <td id="prixJeunes"> </td>
+                                </tr>
+                                <tr id="ligneEnfants" class="hidden">
+                                    <td> Enfant 4 à 17 ans inclus </td>
+                                    <td id="nbEnfants"> </td>
+                                    <td id="prixUnitEnfants"> </td>
+                                    <td id="prixEnfants"> </td>
+                                </tr>
+                                <tr id="ligneBebes" class="hidden">
+                                    <td> Bébé de moins de 4 ans </td>
+                                    <td id="nbBebes"> </td>
+                                    <td> Gratuit </td>
+                                    <td> 0 </td>
+                                </tr>
+                                <tr id="ligneAnimaux" class="hidden">
+                                    <td> Animal de compagnie </td>
+                                    <td id="nbAnimaux"> </td>
+                                    <td> 3.35 </td>
+                                    <td id="prixAnimaux"> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="total">
+                            <p class="libelle"> Sous-total personnes : &nbsp</p>
+                            <p id="prixTotalPersonnes" class="infos">  </p>
+                        </div>
+                    </div>
+
+                    <p class="libelle"> Les véhicules : </p>
+
+                    <div id="tab">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th> Catégorie </th>
+                                    <th> Quantité </th>
+                                    <th> Prix unitaire </th>
+                                    <th> Prix ligne </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr id="ligneTrot" class="hidden">
+                                    <td> Trottinette électrique </td>
+                                    <td id="nbTrot"> </td>
+                                    <td id="prixUnitTrot"> </td>
+                                    <td id="prixTotalTrot"> </td>
+                                </tr>
+                                <tr id="ligneVelo" class="hidden">
+                                    <td> Vélo ou remorque à vélo </td>
+                                    <td id="nbVelo"> </td>
+                                    <td id="prixUnitVelo"> </td>
+                                    <td id="prixTotalVelo"> </td>
+                                </tr>
+                                <tr id="ligneVeloElec" class="hidden">
+                                    <td> Vélo électrique </td>
+                                    <td id="nbVeloElec"> </td>
+                                    <td id="prixUnitVeloElec"> </td>
+                                    <td id="prixTotalVeloElec"> </td>
+                                </tr>
+                                <tr id="ligneGrosVelo" class="hidden">
+                                    <td> Vélo cargo ou tandem </td>
+                                    <td id="nbGrosVelo"> </td>
+                                    <td id="prixUnitGrosVelo"> </td>
+                                    <td id="prixTotalGrosVelo"> </td>
+                                </tr>
+                                <tr id="ligneMobil" class="hidden">
+                                    <td> Deux-roues <= 125 cm3 </td>
+                                    <td id="nbMobil"> </td>
+                                    <td id="prixUnitMobil"> </td>
+                                    <td id="prixTotalMobil"> </td>
+                                </tr>
+                                <tr id="ligneMoto" class="hidden">
+                                    <td> Deux-roues > 125 cm3 </td>
+                                    <td id="nbMoto"> </td>
+                                    <td id="prixUnitMoto"> </td>
+                                    <td id="prixTotalMoto"> </td>
+                                </tr>
+                                <tr id="ligneAutoCat1" class="hidden">
+                                    <td> Voiture moins de 4 m </td>
+                                    <td id="nbAutoCat1"> </td>
+                                    <td id="prixUnitAutoCat1"> </td>
+                                    <td id="prixTotalAutoCat1"> </td>
+                                </tr>
+                                <tr id="ligneAutoCat2" class="hidden">
+                                    <td> Voiture de 4 m à 4.39 m </td>
+                                    <td id="nbAutoCat2"> </td>
+                                    <td id="prixUnitAutoCat2"> </td>
+                                    <td id="prixTotalAutoCat2"> </td>
+                                </tr>
+                                <tr id="ligneAutoCat3" class="hidden">
+                                    <td> Voiture de 4.40 m à 4.79 m </td>
+                                    <td id="nbAutoCat3"> </td>
+                                    <td id="prixUnitAutoCat3"> </td>
+                                    <td id="prixTotalAutoCat3"> </td>
+                                </tr>
+                                <tr id="ligneAutoCat4" class="hidden">
+                                    <td> Voiture de 4.80 m ou plus </td>
+                                    <td id="nbAutoCat4"> </td>
+                                    <td id="prixUnitAutoCat4"> </td>
+                                    <td id="prixTotalAutoCat4"> </td>
+                                </tr>
+                                <tr id="ligneCampCar" class="hidden">
+                                    <td> Camping-Car - véhicule de plus de 2.10 m de haut </td>
+                                    <td id="nbCampCar"> </td>
+                                    <td id="prixUnitCampCar"> </td>
+                                    <td id="prixTotalCampCar"> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="total">
+                            <p class="libelle"> Sous-total véhicules : &nbsp</p>
+                            <p id="prixTotalVehicules" class="infos">  </p>
+                        </div>
+                    </div>
+
+                    <p id="prixTotal"> Prix Total : 0€ </p>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="box2">
+            <p> Compagnie Alsacienne de Navigation, 2025. Tous droits réservés </p>
+        </footer>
+
+        <script src="voirFacture.js"></script>
+    </body>
+</html>
