@@ -548,6 +548,40 @@ table {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+#infosStats{
+    flex-direction: column;
+    align-self: baseline;
+    margin-left: 7%;
+    margin-right: 7%;
+    width: 86%;
+    margin-top: 3vh;
+    margin-bottom: 7vh;
+}
+
+#infosStats p {
+    color:#000;
+    font-size: 17px;
+}
+
+#infosStats #colonne1 {
+    width: 60vw;
+}
+
+#infosStats .colonnes {
+    flex-direction: column;
+}
+
+.separation {
+    border-top: 3px double black;
+}
+
+
+
+
+
+
+
+
 
 
 

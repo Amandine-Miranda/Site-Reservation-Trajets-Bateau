@@ -1,0 +1,66 @@
+[{
+	"reservation":
+	{
+		"nom" "miranda",
+		"idLiaison" 0,
+		"date" "2025-11-14",
+		"heure" "12:30",
+		"horodatage" "2026-01-13 12:32:24",
+	},
+	"passagers": [
+		{
+			"nom": "miranda",
+			"prenom": "amandine",
+			"codeCategorie": "jeu1825"
+		},
+		{
+			"nom": "connard",
+			"prenom": "leo",
+			"codeCategorie": "ancomp"
+		}
+	],
+
+	"vehicules": [
+		{
+			"codeCategorie" "cartand",
+			"quantite" 50
+		},
+		{
+			"codeCategorie" "camp",
+			"quantite" 1000
+		}
+	],
+},
+{
+	"reservation":
+	{
+		"nom" "retour miranda",
+		"idLiaison" 0,
+		"date" "2025-11-22",
+		"heure" "14:45",
+		"horodatage" "2026-01-13 12:32:52",
+	},
+	"passagers": [
+		{
+			"nom": "miranda",
+			"prenom": "amandine",
+			"codeCategorie": "jeu1825"
+		},
+		{
+			"nom": "connard",
+			"prenom": "leo",
+			"codeCategorie": "ancomp"
+		}
+	],
+
+	"vehicules": [
+		{
+			"codeCategorie" "cartand",
+			"quantite" 50
+		},
+		{
+			"codeCategorie" "camp",
+			"quantite" 1000
+		}
+	],
+}]

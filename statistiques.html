@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <title> Tableau de Bord </title>
+        <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+        <video autoplay muted loop id="bg-video">
+        <source src="oceanvid3.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas les vidéos HTML5.
+        </video>
+
+        <header class="box">
+            <a href="accueil.html"> <img src="CAN.png" id="logoCAN"> </a>
+        </header>
+
+        <main>
+            <div id="entrerLiaison">
+                <label for="liaison" id="labelLiaison"> Sélectionnez la liaison pour laquelle vous voulez voir les informations : </label>
+                <select id="liaison" onChange="javascript:chargerAPI();">
+                    <option value="selected"> </option>
+                    <option value="1">Lorient → Groix</option>
+                    <option value="2">Groix → Lorient</option>
+                    <option value="3">Quiberon → Le Palais</option>
+                    <option value="4">Le Palais → Quiberon</option>
+                </select>
+            </div>
+
+            <div id="bgBoxTableauBord">
+                <img src="CAN.png" alt="logoCAN" id="logoFacture">
+                <h2> Statistiques </h2>
+                <div id="infosStats" class="hidden">
+                    <div class="colonnes">
+                        <div class="colonne">
+                            <p class="libelle"> Liaison : &nbsp</p>
+                            <p id="liaisonUtil" class="infos"> </p>
+                        </div>
+
+                        <hr class="separation">
+                        
+                        <div class="colonne">
+                            <p class="libelle"> Nombre de passagers de novembre : &nbsp</p>
+                            <p id="nbPassagers" class="infos"> </p>
+                        </div>
+                        <div class="colonne">
+                            <p class="libelle"> Chiffre d'affaires de novembre (passagers) : &nbsp</p>
+                            <p id="chiffrePassagers" class="infos"> </p>
+                        </div>
+
+                        <hr class="separation">
+
+                        <div class="colonne">
+                            <p class="libelle"> Nombre de véhicules de novembre : &nbsp</p>
+                            <p id="nbVehicules" class="infos"> </p>
+                        </div>
+                        <div class="colonne">
+                            <p class="libelle"> Chiffre d'affaires de novembre (véhicules) : &nbsp</p>
+                            <p id="chiffreVehicules" class="infos"> </p>
+                        </div>
+                        
+                        <hr class="separation">
+
+                        <div class="colonne">
+                            <p class="libelle"> Chiffre d'affaires global de novembre : &nbsp</p>
+                            <p id="chiffreGlobal" class="infos"> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="box2">
+            <p> Compagnie Alsacienne de Navigation, 2025. Tous droits réservés </p>
+        </footer>
+
+        <script src="stats.js"></script>
+    </body>
+</html>
