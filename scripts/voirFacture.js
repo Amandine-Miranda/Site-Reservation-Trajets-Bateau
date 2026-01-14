@@ -1,10 +1,6 @@
 let facture;                                                                                        // on initialise une variable facture 
-const id = document.getElementById("numResa").value;                                                // on initialise une constante id qui stocke le numéro de réservation récupéré depuis le html (entré par l'utilisateur)
-const urlAPI = `https://can.iutrs.unistra.fr/api/reservation/${id}`;                                // on initialise une constante urlAPI qui stocke l'URL de l'API avec le bon numéro de réservation
 let passager = 1;                                                                                   // on intiialise une variable passager à 1 car l'API commence à 1 et pas 0
 let vehicule = 1;                                                                                   // on initialise une variable véhicule à 1 car l'API commence à 1 et pas 0
-const urlPassager = `https://can.iutrs.unistra.fr/api/reservation/${id}/passager/${passager}`;      // on initialise une constante qui contient le modèle des URL pour les passagers
-const urlVehicule = `https://can.iutrs.unistra.fr/api/reservation/${id}/vehicule/${vehicule}`;      // on initialise une constante qui contient le modèle des URL pour les véhicules
 
 const TARIF_ADULTE_GROIX = 18.75;                                                                   // on initialise une constante qui contient le tarif pour les adultes pour la liaison qui vient ou part de Groix
 const TARIF_JEUNE_GROIX = 13.80;                                                                    // on initialise une constante qui contient le tarif pour les jeunes pour la liaison qui vient ou part de Groix
@@ -22,6 +18,8 @@ let prixTotalEnfants;                                                           
 let prixTotalAnimaux;                                                                               // on initialise une variable qui contient le tarif total pour les animaux
 
 async function chargerAPI() {                                                                       // fonction principale qu'on appelle lorsqu'on appuie sur le bouton "appuyer" elle permet tout d'abord de charger les infos de l'API, asynchrone car on attend (await) d'avoir récupéré les informations (fetch) avec succès pour ensuite les stocker (response)
+    let id = document.getElementById("numResa").value;                                                  // on initialise une variable id qui stocke le numéro de réservation récupéré depuis le html (entré par l'utilisateur)
+    let urlAPI = `https://can.iutrs.unistra.fr/api/reservation/${id}`;                                  // on initialise une variable urlAPI qui stocke l'URL de l'API avec le bon numéro de réservation
     try {
         const response = await fetch(urlAPI);
         facture = await response.json();                                                            // on stocke les informations récupérées sur l'API dans la variable facture
@@ -33,13 +31,13 @@ async function chargerAPI() {                                                   
 }
 
 async function chargerPassager(passager) {                                                          // fonction pour charger les informations du passager depuis l'API, prend en paramètre passager, pour pouvoir parcourir tous les passagers. asynchrone car on attend (await) d'avoir récupéré les informations (fetch) avec succès pour ensuite les stocker (response)
-    const urlPassager = `https://can.iutrs.unistra.fr/api/reservation/${facture.id}/passager/${passager}`;
+    let urlPassager = `https://can.iutrs.unistra.fr/api/reservation/${facture.id}/passager/${passager}`;
     const response = await fetch(urlPassager);
     return await response.json();
 }
 
 async function chargerVehicule(vehicule) {                                                          // asynchrone car on attend (await) d'avoir récupéré les informations (fetch) avec succès pour ensuite les stocker (response)
-    const urlVehicule = `https://can.iutrs.unistra.fr/api/reservation/${facture.id}/vehicule/${vehicule}`;
+    let urlVehicule = `https://can.iutrs.unistra.fr/api/reservation/${facture.id}/vehicule/${vehicule}`;
     const response = await fetch(urlVehicule);
     return await response.json();
 }
@@ -82,12 +80,10 @@ async function afficherFacture() {                                              
         else if(infosPassager.libelleCategorie.includes("Bébé")){                                   // si la catégorie du passager (info récupérée de l'API) contient "Bébé", c'est donc un bébé
             nbBebes++;                                                                              // on augmente donc le nombre de bébés
         }
-        else if(infosPassager.libelleCategorie.inclues("Animal")){                                  // si la catégorie du passager (info récupérée de l'API) contient "Animal", c'est donc un animal de compagnie
+        else if(infosPassager.libelleCategorie.includes("Animal")){                                 // si la catégorie du passager (info récupérée de l'API) contient "Animal", c'est donc un animal de compagnie
             nbAnimaux++;                                                                            // on augmente donc le nombre d'animaux de compagnie
         }
     }
-
-    nbAdultes = 0;
     
     document.getElementById("nbAdultes").textContent = nbAdultes;                                   // on part du principe qu'il y a toujours au moins un adulte dans la réservation
 
@@ -317,7 +313,7 @@ async function afficherFacture() {                                              
         document.getElementById("prixTotalVehicules").textContent =  Number.parseFloat(prixTotalVehicules).toFixed(2) + "€";    // on l'affiche en coupant au deuxième chiffre pour pas que ce soit trop long et avec un euro
 
         let prixTotal = 0;                                                                          // on initialise une variable qui stocke le prix total de toute la réservation
-        prixTotal = prixTotalPersonnes + prixTotalVehicules;                                        // on calcule ce prix total
+        prixTotal = Number.parseFloat(prixTotalPersonnes + prixTotalVehicules).toFixed(2);          // on calcule ce prix total
 
         document.getElementById("prixTotal").textContent = "Prix total : " + prixTotal + "€";       // on l'affiche (on a pas besoin de faire un toFixed parce qu'on le fait déjà sur les deux chiffres qu'on additionne ducoup ça donne un chiffre déjà à deux chiffre après la virgule)
     }

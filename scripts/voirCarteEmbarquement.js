@@ -1,8 +1,8 @@
-const id = document.getElementById("numResa").value;                                                // initialise une constante id qui stocke le numéro de réservation récupéré par l'API
-const urlAPI = `https://can.iutrs.unistra.fr/api/reservation/${id}`;                                // initialise une constante urlAPI qui stocke l'URL menant à l'API avec le bon numéro d'id pour récupérer toutes les informations
 let index = 1;                                                                                      // initialise une variable index qui commence à 1 (car les passagers sont renseignés à partir de 1 dans l'API)
 
 async function chargerAPI() {                                                                       // fonction principale qu'on appelle lorsqu'on appuie sur le bouton "appuyer" elle permet tout d'abord de charger les infos de l'API, asynchrone car on attend (await) d'avoir récupéré les informations (fetch) avec succès pour ensuite les stocker (response)
+    let id = document.getElementById("numResa").value;                                              // initialise une variable id qui stocke le numéro de réservation récupéré par l'API
+    let urlAPI = `https://can.iutrs.unistra.fr/api/reservation/${id}`;                              // initialise une variable urlAPI qui stocke l'URL menant à l'API avec le bon numéro d'id pour récupérer toutes les informations
     try {
         const response = await fetch(urlAPI);
         carte = await response.json();
@@ -41,6 +41,9 @@ function chargerCarte(){                                                        
 }
 
 async function chargerPassager(){                                                                   // fonction qu'on appelle pour charger les infos spécifiques au passager sur la carte d'embarquement
+
+    id = document.getElementById("numResa").value;                                                  // constante id qui stocke le numéro de réservation récupéré par l'API
+    urlAPI = `https://can.iutrs.unistra.fr/api/reservation/${id}`;                                  // constante urlAPI qui stocke l'URL menant à l'API avec le bon numéro d'id pour récupérer toutes les informations
 
     const urlPassager = `${urlAPI}/passager/${index}`                                               // constante qui stocke l'URL où aller chercher les informations du passager à partir de l'API
 
