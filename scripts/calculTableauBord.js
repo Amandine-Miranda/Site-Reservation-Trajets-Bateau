@@ -1,21 +1,21 @@
-async function chargerAPI() {
-    let liaisonUtil = document.getElementById("liaison").value;
-    let dateUtil = document.getElementById("date").value;
+async function chargerAPI() {                                                                       // fonction principale qu'on appelle lorsqu'on appuie sur le bouton "appuyer" elle permet tout d'abord de charger les infos de l'API, asynchrone car on attend (await) d'avoir récupéré les informations (fetch) avec succès pour ensuite les stocker (response)
+    let liaisonUtil = document.getElementById("liaison").value;                                     // on initialise une variable liaisonUtil qui stocke le numéro de liaison récupéré depuis le html (entré par l'utilisateur)
+    let dateUtil = document.getElementById("date").value;                                           // on initialise une variable dateUtil qui stocke la date depuis le html (entré par l'utilisateur)
 
-    let urlLiaisonDate = `https://can.iutrs.unistra.fr/api/liaison/${liaisonUtil}/remplissage/${dateUtil}`;
+    let urlLiaisonDate = `https://can.iutrs.unistra.fr/api/liaison/${liaisonUtil}/remplissage/${dateUtil}`;     // on initialise une variable qui stocke l'URL de l'API avec le bon numéro de liaison avec le suffixe chiffreAffaire car c'est à ce lien que les infos qui nous intéressent se trouvent
 
     try {
         const response = await fetch(urlLiaisonDate);
-        infos = await response.json();
+        infos = await response.json();                                                              // on stocke les informations récupérées sur l'API dans la variable infos
     } catch (e) {
         console.error("Erreur de chargement JSON :", e);
     }
 
-    chargerInfosLiaison();
+    chargerInfosLiaison();                                                                          // on charge les infos de la liaison à la date donnée
 }
 
-async function chargerInfosLiaison(){
-    liaisonUtil = document.getElementById("liaison").value;
+async function chargerInfosLiaison(){                                                               // permet de charger les infos du tableau de bord avec une liaison et une date donnée
+    liaisonUtil = document.getElementById("liaison").value;                                         // 
     dateUtil = document.getElementById("date").value;
 
     let tbody = document.getElementById("tableBody");

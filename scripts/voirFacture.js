@@ -251,7 +251,7 @@ async function afficherFacture() {                                              
         let prixTotalMobils;                                                                        // on initialise une variable qui contient le nombre de mobilettes
         let prixTotalMotos;                                                                         // on initialise une variable qui contient le nombre de motos
         let prixTotalAutoCat1;                                                                      // on initialise une variable qui contient le nombre de voitures catégorie 1
-        let prixTotalAutoCat2;                                                                      // on initialise une variable qui contient le nombre de voitures catégorie 2
+        let prixTotalAutoCat2;                                                                      // on initialis.colonnese une variable qui contient le nombre de voitures catégorie 2
         let prixTotalAutoCat3;                                                                      // on initialise une variable qui contient le nombre de voitures catégorie 3
         let prixTotalAutoCat4;                                                                      // on initialise une variable qui contient le nombre de voitures catégorie 4
         let prixTotalCampCars;                                                                      // on initialise une variable qui contient le nombre de camping-cars
