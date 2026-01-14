@@ -17,7 +17,7 @@ class Structures
         public struct Passager
         {
                 public string categorie;     	//categorie du passager ex : "adu26p"
-                public string nomFamille;     	//nom de famille du passager ex : "Adams"
+                public string nomFamille;     	//nom de famille du passager ex : "Addams"
                 public string prenom;		//heure de la traversee ex : "Gomez"
 
                 public Passager(string c, string nf, string p)     //constructeur de Passager
@@ -133,7 +133,7 @@ class Structures
                         passagers = new List<Passager>();
                         vehicules = new List<Vehicule>();
 
-                        // on effectue la reservation pas a pas a traves plusieurs fonction pour faciliter le débugage, désencombrer le code et faciliter la compréhension du programme
+                        // on effectue la reservation pas a pas a travers plusieurs fonction pour faciliter le débugage, désencombrer le code et faciliter la compréhension du programme
                         // le nom des fonctions étant explicite leurs appels ne seront pas commentés
 
                         nomResaUtil = reserveNom();     
@@ -233,31 +233,31 @@ class Structures
                         liaisonUtil = int.Parse(Console.ReadLine()); //L'enregistre dans liaisonUtil
                         if (liaisonUtil == 1) //Si liaisonUtil est égal à 1 (si l'utilisateur à choisi la liaison Lorient => Groix)
                         {
-                                liaison = creerDicoHoraires("ressources/lorientgroix.txt"); // On utilise une fonction pour remplir le dictionnaire avec les liaison de la bonne liaison prises du .txt correspondant
-                                Console.WriteLine("Horaires pour Lorient => Groix :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les liaison de la bonne liaison
+                                liaison = creerDicoHoraires("ressources/lorientgroix.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                Console.WriteLine("Horaires pour Lorient => Groix :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
                         }
 
                         else if (liaisonUtil == 2) //Si liaisonUtil est égal à 2 (si l'utilisateur à choisi la liaison Groix => Lorient)
                         {
-                                liaison = creerDicoHoraires("ressources/groixlorient.txt"); // On utilise une fonction pour remplir le dictionnaire avec les liaison de la bonne liaison prises du .txt correspondant
-                                Console.WriteLine("Horaires pour Groix => Lorient :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les liaison de la bonne liaison
+                                liaison = creerDicoHoraires("ressources/groixlorient.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                Console.WriteLine("Horaires pour Groix => Lorient :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
                         }
 
                         else if (liaisonUtil == 3) //Si liaisonUtil est égal à 3 (si l'utilisateur à choisi la liaison Quiberon => Le Palais)
                         {
-                                liaison = creerDicoHoraires("ressources/quiberonpalais.txt"); // On utilise une fonction pour remplir le dictionnaire avec les liaison de la bonne liaison prises du .txt correspondant
-                                Console.WriteLine("Horaires pour Quiberon => Le Palais :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les liaison de la bonne liaison
+                                liaison = creerDicoHoraires("ressources/quiberonpalais.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                Console.WriteLine("Horaires pour Quiberon => Le Palais :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
                         }
 
                         else if (liaisonUtil == 4) //Si liaisonUtil est égal à 4 (si l'utilisateur à choisi la liaison Le Palais => Quiberon)
                         {
-                                liaison = creerDicoHoraires("ressources/palaisquiberon.txt"); // On utilise une fonction pour remplir le dictionnaire avec les liaison de la bonne liaison prises du .txt correspondant
-                                Console.WriteLine("Horaires pour Le Palais => Quiberon :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les liaison de la bonne liaison
+                                liaison = creerDicoHoraires("ressources/palaisquiberon.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                Console.WriteLine("Horaires pour Le Palais => Quiberon :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
                         }
 
                         else //Sinon, c'est que l'utilisateur à entré un chiffre non valide
                         {
-                                Console.WriteLine("Veuillez réessayez en entrant un chiffre entre 1 et 4"); // On en l'informe
+                                Console.WriteLine("Veuillez réessayez en entrant un chiffre entre 1 et 4"); // On l'en informe
                         }
                 }
                 return (liaison,liaisonUtil);
