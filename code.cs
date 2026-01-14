@@ -117,8 +117,8 @@ class Structures
 
                 string nomResaUtil = null;     //Nom entré par l'utilisateur pour la réservation
                 int liaisonUtil = 0;        //Liaison choisie par l'utilisateur
-                Dictionary<string, List<string>> horaires;    //Dictionnaire des horaires en fonction de la liaison choisie
-                horaires = new Dictionary<string, List<string>>();   //Initialisation du dictionnaire
+                Dictionary<string, List<string>> liaison;    //Dictionnaire des liaison en fonction de la liaison choisie
+                liaison = new Dictionary<string, List<string>>();   //Initialisation du dictionnaire
 
                 string confirmeRes = "non";     //Variable pour confirmer la réservation, par defaut a "non" pour eviter d'enregister une reservation par accident
                 string dateDepart = null;       // Variable qui stocke le date de départ choisie par l'utilisateur
@@ -133,11 +133,14 @@ class Structures
                         passagers = new List<Passager>();
                         vehicules = new List<Vehicule>();
 
-                        nomResaUtil = reserveNom();
-                        horaires = reserveHoraires();
-                        afficherHoraires(horaires);
-                        dateDepart= reserveDate(horaires);
-                        horaireDepart = reserveHoraireDepart(dateDepart,horaires);
+                        // on effectue la reservation pas a pas a traves plusieurs fonction pour faciliter le débugage, désencombrer le code et faciliter la compréhension du programme
+                        // le nom des fonctions étant explicite leurs appels ne seront pas commentés
+
+                        nomResaUtil = reserveNom();     
+                        (liaison,liaisonUtil) = reserveLiaison();
+                        afficherHoraires(liaison);
+                        dateDepart= reserveDate(liaison);
+                        horaireDepart = reserveHoraireDepart(dateDepart,liaison);
                         passagers = reservePassagers();
                         vehicules = reserveVehicules(catVe);
 
@@ -157,8 +160,8 @@ class Structures
         public static Reservation reserverRetour(Reservation aller)
         {
                 string nomRes = null;     //Nom entré par l'utilisateur pour la réservation
-                Dictionary<string, List<string>> horaires;    //Dictionnaire des horaires en fonction de la liaison choisie
-                horaires = new Dictionary<string, List<string>>();   //Initialisation du dictionnaire
+                Dictionary<string, List<string>> liaison;    //Dictionnaire des liaison en fonction de la liaison choisie
+                liaison = new Dictionary<string, List<string>>();   //Initialisation du dictionnaire
 
                 string confirmeRes = "non";   //Variable pour confirmer la réservation, par defaut a "non" pour eviter d'enregister une reservation par accident
                 string dateDepart = null; // Variable qui stocke le date de départ choisie par l'utilisateur
@@ -172,26 +175,26 @@ class Structures
                         /////////////// on choisit la liaison inverse a la place de l'utilisateur pour éviter les erreurs ///////////////
                         if (aller.liaison == 1)
                         {
-                                horaires = creerDicoHoraires("ressources/groixlorient.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                liaison = creerDicoHoraires("ressources/groixlorient.txt"); // On utilise une fonction pour remplir le dictionnaire avec les liaison de la bonne liaison prises du .txt correspondant
                         }
                         else if (aller.liaison == 2)
                         {
-                                horaires = creerDicoHoraires("ressourceslorientgroix.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                liaison = creerDicoHoraires("ressourceslorientgroix.txt"); // On utilise une fonction pour remplir le dictionnaire avec les liaison de la bonne liaison prises du .txt correspondant
                         }
                         else if (aller.liaison == 3)
                         {
-                                horaires = creerDicoHoraires("ressources/palaisquiberon.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                liaison = creerDicoHoraires("ressources/palaisquiberon.txt"); // On utilise une fonction pour remplir le dictionnaire avec les liaison de la bonne liaison prises du .txt correspondant
                         }
 
                         else //Si aller.liason est égal à 4 (si l'utilisateur à choisi la liaison Le Palais => Quiberon)
                         {
-                                horaires = creerDicoHoraires("ressources/quiberonpalais.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
+                                liaison = creerDicoHoraires("ressources/quiberonpalais.txt"); // On utilise une fonction pour remplir le dictionnaire avec les liaison de la bonne liaison prises du .txt correspondant
                         }
 
 
-                        afficherHoraires(horaires);
-                        dateDepart = reserveDate(horaires);
-                        horaireDepart = reserveHoraireDepart(dateDepart, horaires);
+                        afficherHoraires(liaison);
+                        dateDepart = reserveDate(liaison);
+                        horaireDepart = reserveHoraireDepart(dateDepart, liaison);
                         Console.WriteLine("Confirmez-vous cette reservation ? (oui/non)\nNom : " + nomRes + "\nDate du départ : " + dateDepart + "\nHeure du départ : " + horaireDepart); //On demande à l'utilisateur si sa réservation est bonne
 
                         confirmeRes = Console.ReadLine(); // Et ensuite on stocke sa réponse dans confirmeRes pour sortir du Tant Que si c'est égal à "oui"
@@ -220,36 +223,36 @@ class Structures
                 return nomResaUtil;
         }
 
-        public static Dictionary<string, List<string>> reserveHoraires()        // gere la reservation de la liaison
+        public static (Dictionary<string, List<string>>,int) reserveLiaison()        // gere la reservation de la liaison
         {
                 int liaisonUtil = 0;
-                Dictionary<string, List<string>> horaires = new Dictionary<string, List<string>>();
+                Dictionary<string, List<string>> liaison = new Dictionary<string, List<string>>();
                 while (liaisonUtil != 1 && liaisonUtil != 2 && liaisonUtil != 3 && liaisonUtil != 4) //Tant que l'utilisateur n'a pas fait un choix valide (entre 1 et 4)
                 {
                         Console.WriteLine("Pour quelle liaison voulez-vous réserver ?\n1 - Lorient => Groix\n2 - Groix => Lorient\n3 - Quiberon => Le Palais\n4 - Le Palais => Quiberon");      //Demande à l'utilisateur quelle liaison il veut choisir
                         liaisonUtil = int.Parse(Console.ReadLine()); //L'enregistre dans liaisonUtil
                         if (liaisonUtil == 1) //Si liaisonUtil est égal à 1 (si l'utilisateur à choisi la liaison Lorient => Groix)
                         {
-                                horaires = creerDicoHoraires("ressources/lorientgroix.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
-                                Console.WriteLine("Horaires pour Lorient => Groix :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
+                                liaison = creerDicoHoraires("ressources/lorientgroix.txt"); // On utilise une fonction pour remplir le dictionnaire avec les liaison de la bonne liaison prises du .txt correspondant
+                                Console.WriteLine("Horaires pour Lorient => Groix :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les liaison de la bonne liaison
                         }
 
                         else if (liaisonUtil == 2) //Si liaisonUtil est égal à 2 (si l'utilisateur à choisi la liaison Groix => Lorient)
                         {
-                                horaires = creerDicoHoraires("ressources/groixlorient.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
-                                Console.WriteLine("Horaires pour Groix => Lorient :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
+                                liaison = creerDicoHoraires("ressources/groixlorient.txt"); // On utilise une fonction pour remplir le dictionnaire avec les liaison de la bonne liaison prises du .txt correspondant
+                                Console.WriteLine("Horaires pour Groix => Lorient :\n");        // On informe à l'utilisateur qu'il s'apprête à voir les liaison de la bonne liaison
                         }
 
                         else if (liaisonUtil == 3) //Si liaisonUtil est égal à 3 (si l'utilisateur à choisi la liaison Quiberon => Le Palais)
                         {
-                                horaires = creerDicoHoraires("ressources/quiberonpalais.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
-                                Console.WriteLine("Horaires pour Quiberon => Le Palais :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
+                                liaison = creerDicoHoraires("ressources/quiberonpalais.txt"); // On utilise une fonction pour remplir le dictionnaire avec les liaison de la bonne liaison prises du .txt correspondant
+                                Console.WriteLine("Horaires pour Quiberon => Le Palais :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les liaison de la bonne liaison
                         }
 
                         else if (liaisonUtil == 4) //Si liaisonUtil est égal à 4 (si l'utilisateur à choisi la liaison Le Palais => Quiberon)
                         {
-                                horaires = creerDicoHoraires("ressources/palaisquiberon.txt"); // On utilise une fonction pour remplir le dictionnaire avec les horaires de la bonne liaison prises du .txt correspondant
-                                Console.WriteLine("Horaires pour Le Palais => Quiberon :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les horaires de la bonne liaison
+                                liaison = creerDicoHoraires("ressources/palaisquiberon.txt"); // On utilise une fonction pour remplir le dictionnaire avec les liaison de la bonne liaison prises du .txt correspondant
+                                Console.WriteLine("Horaires pour Le Palais => Quiberon :\n");   // On informe à l'utilisateur qu'il s'apprête à voir les liaison de la bonne liaison
                         }
 
                         else //Sinon, c'est que l'utilisateur à entré un chiffre non valide
@@ -257,24 +260,24 @@ class Structures
                                 Console.WriteLine("Veuillez réessayez en entrant un chiffre entre 1 et 4"); // On en l'informe
                         }
                 }
-                return horaires;
+                return (liaison,liaisonUtil);
 
         }
 
-        public static string reserveDate(Dictionary<string, List<string>> horaires)
+        public static string reserveDate(Dictionary<string, List<string>> liaison)
         {
                 bool dateValide = false;        // Variable permettant de verifier si la date de depart entrée est valide , initialisée a faux car au début du code aucune date n'est rentrée
                 string dateDepart = null;       // Variable qui stocke le date de départ choisie par l'utilisateur
                 while (!dateValide) // boucle verifiant que la date entrée est valide
                 {
                         Console.WriteLine("Choisissez votre date de départ. "); //Demande à l'utilisateur de choisir une date de départ à partir de la liste de jours proposés précédemment
-                        dateDepart = Console.ReadLine().ToUpper(); //Stocke la réponse de l'utilisateur et la mets en majuscule pour chercher plus facilement dans le dictionnaire des horaires
-                        foreach (string date in horaires.Keys) //parcoure les clefs du dictionnaire horaires qui sont des dates 
+                        dateDepart = Console.ReadLine().ToUpper(); //Stocke la réponse de l'utilisateur et la mets en majuscule pour chercher plus facilement dans le dictionnaire des liaison
+                        foreach (string date in liaison.Keys) //parcoure les clefs du dictionnaire liaison qui sont des dates 
                         {
 
                                 if (date == dateDepart)
                                 {
-                                        dateValide = true; // si la date entrée par l'utilisateur est une clef du dictionnaire horaires alort la date est valide
+                                        dateValide = true; // si la date entrée par l'utilisateur est une clef du dictionnaire liaison alort la date est valide
                                 }
 
                         }
@@ -286,13 +289,13 @@ class Structures
                 return dateDepart;
         }
 
-        public static string reserveHoraireDepart(string dateDepart,Dictionary<string, List<string>> horaires)
+        public static string reserveHoraireDepart(string dateDepart,Dictionary<string, List<string>> liaison)
         {
                 string horaireDepart = null; // Variable qui stocke l'heure choisie par l'utilisateur
                 bool horaireValide = false;     // Variable permettant de verifier si l'heure de depart entrée est valide , initialisée a faux car au début du code aucune heure n'est rentrée
                 
                 Console.Write("\n" + dateDepart + " : "); //on précise le jour choisit
-                foreach (string heure in horaires[dateDepart]) // Et pour chaque heure dans le jour
+                foreach (string heure in liaison[dateDepart]) // Et pour chaque heure dans le jour
                 {
                         Console.Write(heure + " | "); // On l'écrit avec un séparateur pour aérer
                 }
@@ -302,12 +305,12 @@ class Structures
                         Console.WriteLine("Choisissez votre heure de départ . (NN:NN) "); //Demande à l'utilisateur de choisir une date de départ à partir de la liste de jours proposés précédemment
                         horaireDepart = Console.ReadLine(); //Stocke la réponse de l'utilisateur 
 
-                        foreach (string heure in horaires[dateDepart]) //parcoure les horaires disponibles du jour choisit 
+                        foreach (string heure in liaison[dateDepart]) //parcoure les liaison disponibles du jour choisit 
                         {
 
                                 if (heure == horaireDepart)
                                 {
-                                        horaireValide = true; // si l'horaire entrée par l'utilisateur est une valeur du dictionnaire horaires alort l'horaire est valide
+                                        horaireValide = true; // si l'horaire entrée par l'utilisateur est une valeur du dictionnaire liaison alort l'horaire est valide
                                 }
 
                         }
@@ -329,7 +332,7 @@ class Structures
                 string valide = "non"; // variable verifiant si les information esntrées sont correctes, initialisée a non car on veut que la boucle s'execute au moins une fois
 
 
-                while (!(boucle.ToLower().Contains("non")))  //Tant que la boucle n'est pas confirmée
+                while ((boucle.ToLower().Contains("oui")))  //Tant que la boucle n'est pas confirmée
                 {
                         //on reinitialise les variables changées dans cette boucle au cas où on boucle
                         age = 0;
@@ -413,7 +416,7 @@ class Structures
                 Console.WriteLine("Souhaitez vos rajouter un vehicule a votre reservation ? ( oui/non )");
                 if (Console.ReadLine() == "oui")
                 {
-                        while (!(boucle.ToLower().Contains("non")))  //Tant que la boucle n'est pas confirmée
+                        while ((boucle.ToLower().Contains("oui")))  //Tant que la boucle n'est pas confirmée
                         {
                                 //on reinitialise les variables changées dans cette boucle au cas où on boucle
                                 choixCat = null;
@@ -512,12 +515,12 @@ class Structures
 
 
         
-        public static void afficherHoraires(Dictionary<string, List<string>> horaires)
+        public static void afficherHoraires(Dictionary<string, List<string>> liaison)
         {
-                foreach (string jour in horaires.Keys) //Pour chaque clé (jour) du dictionnaire des horaires du mois de novembre
+                foreach (string jour in liaison.Keys) //Pour chaque clé (jour) du dictionnaire des liaison du mois de novembre
                 {
                         Console.Write(jour + " : "); //On affiche la clé avec un : pour bien espacer
-                        foreach (string heure in horaires[jour]) // Pour chaque valeur de chaque clé dans le dictionnaire des horaire
+                        foreach (string heure in liaison[jour]) // Pour chaque valeur de chaque clé dans le dictionnaire des horaire
                         {
                                 Console.Write(heure + " | "); // On affiche cette valeur (l'heure) avec un | pour bien les séparer
                         }
@@ -581,7 +584,7 @@ class Structures
                         writer.WriteLine("\t\t\"idLiaison\": " + res.liaison + ",");
                         writer.WriteLine("\t\t\"date\": \"" + res.date + "\",");
                         writer.WriteLine("\t\t\"heure\": \"" + res.heure + "\",");
-                        writer.WriteLine("\t\t\"horodatage\": \"" + res.horodatage + "\",");
+                        writer.WriteLine("\t\t\"horodatage\": \"" + res.horodatage + "\"");
 
                         writer.WriteLine("\t},");                      // fin des informations générales
 
@@ -589,7 +592,8 @@ class Structures
 
                         nbPassagers = res.passagers.Count;
                         for (int i = 0; i < nbPassagers - 1; i++)
-                        {
+                        {       
+
                                 writer.WriteLine("\t\t{");                       // les informations du passager :
                                 writer.WriteLine("\t\t\t\"nom\": \"" + res.passagers[i].nomFamille + "\",");
                                 writer.WriteLine("\t\t\t\"prenom\": \"" + res.passagers[i].prenom + "\",");
@@ -615,17 +619,17 @@ class Structures
                                 for (int i = 0; i < nbVehicules - 1; i++)
                                 {
                                         writer.WriteLine("\t\t{");                       // les informations du vehicule :
-                                        writer.WriteLine("\t\t\t\"codeCategorie\" \"" + res.vehicules[i].categorie + "\",");
-                                        writer.WriteLine("\t\t\t\"quantite\" " + res.vehicules[i].quantite);
+                                        writer.WriteLine("\t\t\t\"codeCategorie\": \"" + res.vehicules[i].categorie + "\",");
+                                        writer.WriteLine("\t\t\t\"quantite\": " + res.vehicules[i].quantite);
                                         writer.WriteLine("\t\t},");                      // fin des informations du vehicule
                                 }
 
                                 writer.WriteLine("\t\t{");                       // les informations du dernier vehicule :
-                                writer.WriteLine("\t\t\t\"codeCategorie\" \"" + res.vehicules[nbVehicules - 1].categorie + "\",");
-                                writer.WriteLine("\t\t\t\"quantite\" " + res.vehicules[nbVehicules - 1].quantite);
+                                writer.WriteLine("\t\t\t\"codeCategorie\": \"" + res.vehicules[nbVehicules - 1].categorie + "\",");
+                                writer.WriteLine("\t\t\t\"quantite\": " + res.vehicules[nbVehicules - 1].quantite);
                                 writer.WriteLine("\t\t}");                      // fin des informations du dernier vehicule
                         }
-                        writer.WriteLine("\t],");                      // fin des informations des vehicules
+                        writer.WriteLine("\t]");                      // fin des informations des vehicules
 
                         writer.Close();
 
