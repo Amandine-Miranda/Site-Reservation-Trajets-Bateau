@@ -1,0 +1,34 @@
+[{
+	"reservation":
+	{
+		"nom": "Miranda",
+		"idLiaison": 2,
+		"date": "2025-11-29",
+		"heure": "11:00",
+		"horodatage": "2026-10-19 19:18:59"
+	},
+	"passagers": [
+		{
+			"nom": "Miranda",
+			"prenom": "Amandine",
+			"codeCategorie": "jeu1825"
+		},
+		{
+			"nom": "Chat",
+			"prenom": "Felix",
+			"codeCategorie": "ancomp"
+		},
+		{
+			"nom": "Galien",
+			"prenom": "Léo",
+			"codeCategorie": "jeu1825"
+		}
+	],
+
+	"vehicules": [
+		{
+			"codeCategorie": "cat1",
+			"quantite": 1
+		}
+	]
+}]
