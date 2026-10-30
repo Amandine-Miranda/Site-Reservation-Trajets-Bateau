@@ -4,6 +4,12 @@
 
 ---
 
+![## 📖 À propos du projet -> Page d'accueil du projet](pageAccueil.jpg)
+
+![## 📖 À propos du projet -> Page permettant de voir les cartes d'embarcation](pageCarteEmbarcation.jpg)
+
+---
+
 ## 📖 À propos du projet
 
 Ce projet consiste à développer un site web pour une compagnie fictive de navigation : la **Compagnie Alsacienne de Navigation (CAN)**.
